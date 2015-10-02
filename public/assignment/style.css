@@ -103,3 +103,10 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+.container-margins {
+    margin-right: 8%;
+    margin-left:8%;
+}
+.paragraph-justify {
+    text-align: justify;
+}
