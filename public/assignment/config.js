@@ -5,10 +5,15 @@
         .config(function($routeProvider)
         {
             $routeProvider
-                .when("/",
+              /*  .when("/",
                 {
                     templateUrl: "index.html",
-                    controller: ""
+
+                })*/
+                .when("/",
+                {
+                    templateUrl: "home/home.view.html",
+
                 })
 
         });
