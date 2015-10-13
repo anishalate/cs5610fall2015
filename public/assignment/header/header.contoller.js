@@ -2,7 +2,7 @@
 {
     angular
         .module("FormBuilderApp")
-        .controller("header.controller", HeaderController);
+        .controller("HeaderController", HeaderController);
 
     function HeaderController($scope)
     {
