@@ -4,8 +4,8 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope)
+    function HeaderController($scope,$location)
     {
-
+        $scope.$location = $location;
     }
 })();
