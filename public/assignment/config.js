@@ -5,11 +5,7 @@
         .config(function($routeProvider)
         {
             $routeProvider
-              /*  .when("/",
-                {
-                    templateUrl: "index.html",
 
-                })*/
                 .when("/",
                 {
                     templateUrl: "home/home.view.html",
@@ -20,5 +16,14 @@
                     templateUrl: "home/home.view.html",
 
                 })
+                .when("/profile",
+                {
+                    templateUrl: "profile/profile.view.html",
+                })
+                .when("/login",
+                {
+                    templateUrl: "login/login.view.html",
+                })
+
         });
 })();
