@@ -24,6 +24,14 @@
                 {
                     templateUrl: "login/login.view.html",
                 })
+                .when("/register",
+                {
+                    templateUrl: "register/register.view.html",
+                })
+                .when("/form",
+                {
+                    templateUrl: "form/form.view.html",
+                })
 
         });
 })();
