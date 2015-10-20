@@ -3,8 +3,15 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService($rootScope) {
         var currentUsers = [];
+        var service ={
+            createUser :createUser,
+            findUserByUsernameAndPassword:findUserByUsernameAndPassword,
+            findAllUsers:findAllUsers,
+            deleteUserById:deleteUserById,
+            updateUser:updateUser
+        };
 
         function findUserByUsernameAndPassword(username,password,callback){
             var flag= false;
@@ -19,6 +26,7 @@
             }
           callback(flag);
 
+
         }
 
         function findAllUsers(callback){
@@ -26,9 +34,11 @@
         }
 
         function createUser(newUser,callback){
-            var guid = Guid.create();
-            newUser.id = guid.value;
+            //var guid = Guid.create();
+            newUser.id = guid();
             currentUsers.push(newUser);
+            callback(newUser);
+            //console.log("rootscope object"+ $rootScope.currentUser.username);
 
 
         }
@@ -55,5 +65,15 @@
             }
             callback(updateUser);
         }
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
+        return service;
     }
 })();

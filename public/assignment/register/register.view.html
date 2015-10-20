@@ -1,33 +1,33 @@
 <h1 class="page-header">Register</h1>
-<div class="row">
+<div class="row" ng-contoller="RegisterController">
     <form class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 control-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" class="form-control" placeholder="Username" ng-model="user.username">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Verify Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control"  placeholder="Verify Password">
+                <input type="password" class="form-control"  placeholder="Verify Password" ng-model="verifyPassword">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a type="submit" class="btn btn-default btn-block" href="profile.html">Register</a>
+                <a type="submit" class="btn btn-default btn-block" ng-click="register()" href="#/profile">Register</a>
             </div>
         </div>
     </form>
