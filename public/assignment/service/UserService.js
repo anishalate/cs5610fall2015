@@ -14,17 +14,17 @@
         };
 
         function findUserByUsernameAndPassword(username,password,callback){
-            var flag= false;
+            var user ={};
             for(var i=0;i< currentUsers.length;i++)
             {
                 if(currentUsers[i].username===username && currentUsers[i].password=== password)
                 {
-                    flag = true;
+                    user =currentUsers[i];
                     break;
                 }
 
             }
-          callback(flag);
+          callback(user);
 
 
         }
