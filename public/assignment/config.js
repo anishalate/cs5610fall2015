@@ -35,6 +35,7 @@
                 .when("/form",
                 {
                     templateUrl: "form/form.view.html",
+                    controller: "FormController"
                 })
 
         });

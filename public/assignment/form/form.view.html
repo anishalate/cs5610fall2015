@@ -18,12 +18,24 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td>
+                <div class="col-sm-16">
+                    <input type="text" class="form-control" placeholder="name" ng-model="form.name">
+                </div>
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-plus" ng-click="addForm()" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-ok"  ng-click="updateForm()" aria-hidden="true"> </span>
+            </td>
+
+        </tr>
         <tr ng-repeat ="form in forms">
             <td>
                 <a href="form-fields.html">{{form.name}}</a>
             <td>
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"> </span>
+            <span class="glyphicon glyphicon-remove" ng-click="deleteForm(form.id)" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-pencil" ng-click="selectForm(form.id)"aria-hidden="true"> </span>
             </td>
 
         </tr>
