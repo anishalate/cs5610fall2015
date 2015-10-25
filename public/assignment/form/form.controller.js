@@ -1,3 +1,5 @@
+"use strict";
+
 (function(){
     angular
         .module("FormBuilderApp")
@@ -45,8 +47,9 @@
            }
         }
         $scope.updateForm = function(){
-
-            FormService.updateFormById($scope.form.id,$scope.form,function(updatedForm){
+            $scope.newForm = {};
+            $scope.newForm.name = $scope.form.name;
+            FormService.updateFormById($scope.form.id,$scope.newForm,function(updatedForm){
                     //add something for callback later on.
                 init();
                 $scope.form ={};
