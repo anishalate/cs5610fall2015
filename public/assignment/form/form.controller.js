@@ -54,7 +54,6 @@
                 init();
                 $scope.form ={};
                 $scope.form.name ="";
-
             })
         }
     }

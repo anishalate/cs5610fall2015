@@ -6,12 +6,6 @@
         .config(function($routeProvider)
         {
             $routeProvider
-
-                .when("/",
-                {
-                    templateUrl: "home/home.view.html",
-
-                })
                 .when("/home",
                 {
                     templateUrl: "home/home.view.html",
@@ -38,6 +32,9 @@
                     templateUrl: "form/form.view.html",
                     controller: "FormController"
                 })
+                .otherwise({
+                    redirectTo:"/home"
+                });
 
         });
 })();
