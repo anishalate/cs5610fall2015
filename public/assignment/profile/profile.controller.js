@@ -16,7 +16,7 @@
         $scope.update = function(){
 
             UserService.updateUser($rootScope.currentUser.id,$scope.user, function(newUser){
-                console.log(newUser);
+                //console.log(newUser);
                 $rootScope.currentUser = newUser;
             })
 

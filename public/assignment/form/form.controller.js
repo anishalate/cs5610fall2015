@@ -44,7 +44,11 @@
         }
         $scope.updateForm = function(){
 
-            FormService.updateFormById($scope.form.id,$scope.form,function(){
+            FormService.updateFormById($scope.form.id,$scope.form,function(updatedForm){
+                    //add something for callback later on.
+                $scope.forms.push(updatedForm);
+                $scope.form ={};
+                $scope.form.name ="";
 
             })
         }

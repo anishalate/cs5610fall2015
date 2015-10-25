@@ -10,7 +10,7 @@
         $scope.register = function(){
 
             UserService.createUser($scope.user, function(newUser){
-                console.log(newUser);
+               // console.log(newUser);
                 $rootScope.currentUser = newUser;
             })
 

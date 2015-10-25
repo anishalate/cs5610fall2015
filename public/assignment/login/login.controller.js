@@ -8,13 +8,13 @@
         $scope.login = function(){
 
             UserService.findUserByUsernameAndPassword($scope.username,$scope.password, function(user){
-                console.log(user);
+                //console.log(user);
                 if(!angular.equals({},user)) {
                     $rootScope.currentUser = user;
                     $location.path("/profile");
                 }
                 else{
-                    console.log("User not found");
+                    //console.log("User not found");
                 }
             })
 
