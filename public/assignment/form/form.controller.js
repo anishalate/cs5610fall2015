@@ -13,6 +13,7 @@
         }
 
         function init(){
+            $scope.forms = [];
             FormService.findAllFormsForUser($rootScope.currentUser.id, function(forms){
                 $scope.forms= forms;
             })
@@ -22,7 +23,8 @@
             $scope.newForm ={};
             $scope.newForm.name = $scope.form.name;
             FormService.createFormForUser($rootScope.currentUser.id,$scope.newForm, function(newForm){
-                $scope.forms.push(newForm);
+                //$scope.forms.push(newForm);
+                init();
             })
 
 
@@ -46,7 +48,7 @@
 
             FormService.updateFormById($scope.form.id,$scope.form,function(updatedForm){
                     //add something for callback later on.
-                $scope.forms.push(updatedForm);
+                init();
                 $scope.form ={};
                 $scope.form.name ="";
 

@@ -43,8 +43,7 @@
         function updateFormById(formId,newForm,callback){
             for(var i=0;i<forms.length;i++){
                 if(forms[i].id===formId){}
-                newForm.id = formId;
-                forms[i] = newForm;
+                forms[i].name = newForm.name;
                 break;
             }
             callback(newForm);
