@@ -26,6 +26,12 @@
                     templateUrl: "landlord-signup/landlord-signup.view.html",
 
                 })
+                .when("/signup-form",
+                {
+                    templateUrl: "signup-form/signup-form.view.html",
+
+                })
+
                 .otherwise({
                     redirectTo:"/home"
                 });
