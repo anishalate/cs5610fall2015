@@ -31,6 +31,12 @@
                     templateUrl: "signup-form/signup-form.view.html",
 
                 })
+                .when("/profile",{
+                    templateUrl :"user-profile/user-profile.view.html",
+                })
+                .when("/profile-likes",{
+                    templateUrl :"user-profile/user-profile-likes.view.html",
+                })
 
                 .otherwise({
                     redirectTo:"/home"
