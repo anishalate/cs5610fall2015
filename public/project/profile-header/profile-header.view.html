@@ -13,11 +13,13 @@
                     <a class="navbar-brand" href="#/home">Roomies</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/">Search Roommates</a></li>
+                        <li><a href="#/signin">Search Apartments</a></li>
 
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li  ng-class="{'active':$location.url().indexOf('about')!=-1}"><a href="#/">About</a></li>
-                        <li  ng-class="{'active':$location.url().indexOf('signin')!=-1}"><a href="#/signin">Sign In</a></li>
-                        <li  ng-class="{'active':$location.url().indexOf('signup')!=-1}"><a href="#/signup">Sign Up </a></li>
+                        <li><a href="#/signup">Log Out </a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
