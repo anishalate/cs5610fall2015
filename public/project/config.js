@@ -37,7 +37,9 @@
                 .when("/profile-likes",{
                     templateUrl :"user-profile/user-profile-likes.view.html",
                 })
-
+                .when("/search-roommates",{
+                    templateUrl :"search-roommates/search-roommates.view.html",
+                })
                 .otherwise({
                     redirectTo:"/home"
                 });
