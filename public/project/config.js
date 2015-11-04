@@ -40,6 +40,7 @@
                 .when("/search-roommates",{
                     templateUrl :"search-roommates/search-roommates.view.html",
                 })
+
                 .otherwise({
                     redirectTo:"/home"
                 });
