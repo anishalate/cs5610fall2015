@@ -8,28 +8,28 @@
             $routeProvider
                 .when("/home",
                 {
-                    templateUrl: "home/home.view.html",
+                    templateUrl: "client/views/home/home.view.html",
 
                 })
                 .when("/profile",
                 {
-                    templateUrl: "profile/profile.view.html",
+                    templateUrl: "client/views/profile/profile.view.html",
                     controller: "ProfileController"
                 })
                 .when("/login",
                 {
-                    templateUrl: "login/login.view.html",
+                    templateUrl: "client/views/login/login.view.html",
                     controller: "LoginController"
                 })
                 .when("/register",
                 {
-                    templateUrl: "register/register.view.html",
+                    templateUrl: "client/views/register/register.view.html",
                     controller: "RegisterController"
 
                 })
                 .when("/form",
                 {
-                    templateUrl: "form/form.view.html",
+                    templateUrl: "client/views/form/form.view.html",
                     controller: "FormController"
                 })
                 .otherwise({
