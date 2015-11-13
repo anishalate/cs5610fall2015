@@ -19,7 +19,7 @@ module.exports = function(app){
 
     function createUser(user){
         users.push(user);
-        return users;
+        return user;
     }
 
     function findAll(){
@@ -41,15 +41,18 @@ module.exports = function(app){
     }
 
     function updateUser(id,updatedUser){
+
         for(var i=0;i<users.length;i++)
         {
             if(users[i].id==id){
                 updatedUser.id = id;
                 users[i] = updatedUser;
+
                 break;
             }
         }
-        return users;
+
+        return updatedUser;
 
     }
     function deleteUser(id){

@@ -16,10 +16,11 @@
 
         $scope.update = function(){
 
-            UserService.updateUser($rootScope.currentUser.id,$scope.user, function(newUser){
-                //console.log(newUser);
-                $rootScope.currentUser = newUser;
-            })
+            UserService.updateUser($rootScope.currentUser.id,$scope.user)
+                .then(function(user){
+                    $rootScope.currentUser =user;
+
+                });
 
         }
     }

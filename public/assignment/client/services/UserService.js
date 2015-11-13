@@ -4,8 +4,8 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($rootScope) {
-        var currentUsers = [];
+    function UserService($rootScope,$q,$http) {
+       // var currentUsers = [];
         var service ={
             createUser :createUser,
             findUserByUsernameAndPassword:findUserByUsernameAndPassword,
@@ -14,57 +14,58 @@
             updateUser:updateUser
         };
 
-        function findUserByUsernameAndPassword(username,password,callback){
-            var user ={};
-            for(var i=0;i< currentUsers.length;i++)
-            {
-                if(currentUsers[i].username===username && currentUsers[i].password=== password)
-                {
-                    user =currentUsers[i];
-                    break;
-                }
+        function findUserByUsernameAndPassword(username,password){
 
-            }
-          callback(user);
-
+                var deferred = $q.defer();
+                $http.get("/api/assignment/user?username="+username+"&password="+password)
+                    .success(function(user){
+                        deferred.resolve(user);
+            });
+            return deferred.promise;
 
         }
 
-        function findAllUsers(callback){
-            callback(currentUsers);
+        function findAllUsers(){
+            var deferred = $q.defer();
+            $http.get("/api/assignment/user")
+                .success(function(users){
+                    deferred.resolve(users);
+                });
+            return deferred.promise;
         }
 
-        function createUser(newUser,callback){
-            //var guid = Guid.create();
+        function createUser(newUser){
+
+            var deferred = $q.defer();
             newUser.id = guid();
-            currentUsers.push(newUser);
-            callback(newUser);
-            //console.log("rootscope object"+ $rootScope.currentUser.username);
+            $http.post("/api/assignment/user",newUser)
+                .success(function(user){
+                    deferred.resolve(user);
+                });
+
+            return deferred.promise;
 
 
         }
-        function deleteUserById(id,callback){
-            for(var i=0;i<currentUsers.length;i++)
-            {
-                if(currentUsers[i].id===id){
-                    currentUsers.splice(i,1);
-                    break;
-                }
-            }
-            callback(currentUsers);
+        function deleteUserById(id){
+            var deferred = $q.defer();
+            $http.delete("/api/assignment/user/"+id)
+                .success(function(users){
+                    deferred.resolve(users);
+                });
+
+            return deferred.promise;
         }
 
-        function updateUser(id,updateUser,callback){
+        function updateUser(id,updateUser){
+            var deferred = $q.defer();
+            $http.put("/api/assignment/user/"+id,updateUser)
+                .success(function(user){
+                    deferred.resolve(user);
+                });
 
-            for(var i=0;i<currentUsers.length;i++)
-            {
-                if(currentUsers[i].id===id){
-                    updateUser.id = id;
-                    currentUsers[i] = updateUser;
-                    break;
-                }
-            }
-            callback(updateUser);
+            return deferred.promise;
+
         }
         function guid() {
             function s4() {

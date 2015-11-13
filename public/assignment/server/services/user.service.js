@@ -36,8 +36,6 @@ module.exports = function(app,model){
 
    function updateUser(req,res){
        var updatedUser = req.body;
-       console.log("update user");
-       console.log(req.body);
        res.json(model.updateUser(req.params.id,updatedUser));
    }
    function createUser(req,res){
