@@ -7,7 +7,7 @@
 
     function FormController($scope,$rootScope,$location,FormService) {
         $scope.form ={};
-        $scope.form.name ="";
+        $scope.form.title ="";
 
         $scope.forms = [];
         if($rootScope.currentUser!==undefined) {
@@ -16,26 +16,34 @@
 
         function init(){
             $scope.forms = [];
-            FormService.findAllFormsForUser($rootScope.currentUser.id, function(forms){
-                $scope.forms= forms;
-            })
+            FormService.findAllFormsForUser($rootScope.currentUser.id)
+                .then(function(allFormsByUser){
+                $scope.forms= allFormsByUser;
+                });
         }
 
         $scope.addForm = function(){
             $scope.newForm ={};
-            $scope.newForm.name = $scope.form.name;
-            FormService.createFormForUser($rootScope.currentUser.id,$scope.newForm, function(newForm){
+            $scope.newForm.title = $scope.form.title;
+            FormService.createFormForUser($rootScope.currentUser.id,$scope.newForm)
+                .then(function(newForm){
+                    init();
+                })
                 //$scope.forms.push(newForm);
-                init();
-            })
+
+            $scope.form ={};
+            $scope.form.title ="";
 
 
         }
 
         $scope.deleteForm = function(formId){
-            FormService.deleteFormById(formId,function(allForms){
-                init();
-            })
+            FormService.deleteFormById(formId)
+                .then(function(forms){
+                    init();
+                });
+
+
         }
 
         $scope.selectForm = function(formId){
@@ -48,13 +56,14 @@
         }
         $scope.updateForm = function(){
             $scope.newForm = {};
-            $scope.newForm.name = $scope.form.name;
-            FormService.updateFormById($scope.form.id,$scope.newForm,function(updatedForm){
+            $scope.newForm.title = $scope.form.title;
+            FormService.updateFormById($scope.form.id,$scope.newForm)
+                .then(function(updatedForm){
                     //add something for callback later on.
                 init();
                 $scope.form ={};
-                $scope.form.name ="";
-            })
+                $scope.form.title ="";
+            });
         }
     }
 })();
