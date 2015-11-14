@@ -32,7 +32,7 @@
         </tr>
         <tr ng-repeat ="form1 in forms">
             <td>
-                <a href="#">{{form1.title}}</a>
+                <a href="#/user/{{form1.userId}}/form/{{form1.id}}/fields/">{{form1.title}}</a>
             <td>
             <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="deleteForm(form1.id)" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-pencil btn btn-primary" ng-click="selectForm(form1.id)"aria-hidden="true"> </span>

@@ -14,20 +14,21 @@
   <script src= "views/sidebar/sidebar.controller.js"></script>
   <script src= "services/UserService.js"></script>
   <script src= "services/FormService.js"></script>
+  <script src= "services/FieldService.js"></script>
   <script src ="views/register/register.controller.js"></script>
   <script src ="views/profile/profile.controller.js"></script>
   <script src ="views/login/login.controller.js"></script>
   <script src ="views/form/form.controller.js"></script>
-
+  <script src ="views/field/field.controller.js"></script>
 
 
 <body>
-    <div ng-include src ="'client/views/header/header.view.html'"></div>
+    <div ng-include src ="'views/header/header.view.html'"></div>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <div ng-include src ="'client/views/sidebar/sidebar.view.html'"></div>
+        <div ng-include src ="'views/sidebar/sidebar.view.html'"></div>
       </div>
        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-view"></div>
     </div>
