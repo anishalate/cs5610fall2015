@@ -22,7 +22,7 @@ module.exports = function(app) {
     return api;
     function createForm(form){
         forms.push(form);
-        return form;
+        return forms;
     }
 
     function findAll(){
@@ -49,11 +49,12 @@ module.exports = function(app) {
             if(forms[i].id==id){
                 updatedForm.id = id;
                 updatedForm.userId = forms[i].userId;
+                updatedForm.fields = forms[i].fields;
                 forms[i] = updatedForm;
                 break;
             }
         }
-        return updatedForm;
+        return forms;
 
     }
     function deleteForm(id){
@@ -81,7 +82,7 @@ module.exports = function(app) {
     }
 
     function findFormByUser(userId){
-        var formsByUser = []
+        var formsByUser = [];
         for(var i=0;i<forms.length;i++)
         {
             if(forms[i].userId==userId){

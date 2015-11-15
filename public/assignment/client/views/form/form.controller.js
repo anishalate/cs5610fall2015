@@ -29,8 +29,8 @@
             model.newForm.fields = [];
 
             FormService.createFormForUser($rootScope.currentUser.id,model.newForm)
-                .then(function(newForm){
-                    init();
+                .then(function(allForms){
+                    model.forms = allForms;
                 })
                 //model.forms.push(newForm);
 
@@ -60,10 +60,11 @@
         model.updateForm = function(){
             model.newForm = {};
             model.newForm.title = model.form.title;
+            model.newForm.fields = model.form.fields;
             FormService.updateFormById(model.form.id,model.newForm)
-                .then(function(updatedForm){
+                .then(function(allForms){
                     //add something for callback later on.
-                init();
+                model.forms = allForms;
                 model.form ={};
                 model.form.title ="";
             });
