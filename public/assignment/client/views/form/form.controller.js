@@ -30,7 +30,7 @@
 
             FormService.createFormForUser($rootScope.currentUser.id,model.newForm)
                 .then(function(allForms){
-                    model.forms = allForms;
+                  init();
                 })
                 //model.forms.push(newForm);
 
@@ -64,7 +64,7 @@
             FormService.updateFormById(model.form.id,model.newForm)
                 .then(function(allForms){
                     //add something for callback later on.
-                model.forms = allForms;
+                init();
                 model.form ={};
                 model.form.title ="";
             });
