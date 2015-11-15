@@ -15,14 +15,19 @@ module.exports = function(app,model) {
     }
 
     function deleteField(req,res){
+        res.json(model.deleteFormField(req.params.formId,req.params.fieldId));
 
     }
 
     function createField(req,res){
+        var field = req.body;
+        res.json(model.createFormField(req.params.formId,field));
 
     }
 
     function updateField(req,res){
+        var updatedField = req.body;
+        res.json(model.updateFormField(req.params.formId,req.params.fieldId,updatedField));
 
     }
 }
