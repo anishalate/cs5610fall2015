@@ -40,6 +40,7 @@
             newUser.id = guid();
             $http.post("/api/assignment/user",newUser)
                 .success(function(user){
+                    console.log(user);
                     deferred.resolve(user);
                 });
 

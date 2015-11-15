@@ -5,11 +5,12 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController($scope, $routeParams, $location, FieldService) {
-        $scope.fields =[];
+    function FieldController($routeParams,FieldService) {
+        var model = this;
+        model.fields =[];
         var userId = $routeParams.userId;
         var formId = $routeParams.formId;
-        $scope.selectedField = {};
+        model.selectedField = {};
 
 
 
@@ -18,12 +19,12 @@
             console.log("Form id==" + formId);
             FieldService.getFieldsForForm(formId)
                 .then(function(allFieldsForForm){
-                    $scope.fields= allFieldsForForm;
+                    model.fields= allFieldsForForm;
 
                 });
         }
 
-        $scope.addNewFieldType ={
+        model.addNewFieldType ={
             repeatSelect :null,
             options:[
                 {id: 'option1', value : "Single Line Text Field"},
@@ -35,7 +36,7 @@
             ],
         };
 
-        $scope.addField = function(fieldType){
+        model.addField = function(fieldType){
             console.log(fieldType);
             var id = guid();
             var newField ={};
@@ -73,49 +74,54 @@
                     break;
 
             }
-           // $scope.fields.push(newField);
+           // model.fields.push(newField);
             FieldService.createFieldForForm(formId,newField)
                 .then(function(formById){
-                    $scope.fields = formById.fields;
+                    model.fields = formById.fields;
+
+                },
+                function(error){
+                    alert(error);
                 });
+
         }
 
 
-        $scope.removeField = function (fieldId){
+        model.removeField = function (fieldId){
             FieldService.deleteFieldFromForm(formId,fieldId)
                 .then(function(formById){
-                    $scope.fields = formById.fields;
+                    model.fields = formById.fields;
                 });
         }
 
-        $scope.cloneField = function(field){
+        model.cloneField = function(field){
             var cloneItem = field;
             cloneItem.id = guid();
             FieldService.createFieldForForm(formId,cloneItem)
                 .then(function(formById){
-                    $scope.fields = formById.fields;
+                    model.fields = formById.fields;
                 });
 
 
 
         }
 
-        $scope.showModal = function(fieldId){
+        model.showModal = function(fieldId){
 
 
             $("#myModal").modal();
             FieldService.getFieldForForm(formId,fieldId)
                 .then(function(field){
-                    $scope.selectedField = field;
+                    model.selectedField = field;
                 });
 
         }
 
-        $scope.updateField = function(){
-            console.log($scope.selectedField);
-            FieldService.updateField(formId,$scope.selectedField.id,$scope.selectedField)
+        model.updateField = function(){
+            console.log(model.selectedField);
+            FieldService.updateField(formId,model.selectedField.id,model.selectedField)
                 .then(function(formById){
-                    $scope.fields = formById.fields;
+                    model.fields = formById.fields;
                 });
         }
 

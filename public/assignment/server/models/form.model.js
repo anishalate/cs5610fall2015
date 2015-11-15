@@ -163,6 +163,7 @@ module.exports = function(app) {
 
     function createFormField(formId,field){
         var formById={};
+
         for(var i=0;i<forms.length;i++)
         {
             if(forms[i].id==formId){

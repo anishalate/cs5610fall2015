@@ -4,7 +4,7 @@
                             <li role="presentation" class="active"><a href="#/user">Fields</a></li>
                         </ul>
 
-                        <div class ="container-fluid" ng-repeat="field in fields">
+                        <div class ="container-fluid" ng-repeat="field in model.fields">
                             <br>
                             <div class="row">
                                 <div class ="col-sm-4">
@@ -36,9 +36,9 @@
                                 <div class="col-sm-4">
                                 </div>
                                 <div class="col-sm-4">
-                                    <span class="glyphicon glyphicon-pencil btn btn-primary" aria-hidden="true" ng-click="showModal(field.id)" data-toggle="tooltip"  title="Edit!"></span>
-                                    <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="cloneField(field)" aria-hidden="true" data-toggle="tooltip" title="Clone"></span>
-                                    <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="removeField(field.id)" aria-hidden="true" data-toggle="tooltip" title="Delete!"></span>
+                                    <span class="glyphicon glyphicon-pencil btn btn-primary" aria-hidden="true" ng-click="model.showModal(field.id)" data-toggle="tooltip"  title="Edit!"></span>
+                                    <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="model.cloneField(field)" aria-hidden="true" data-toggle="tooltip" title="Clone"></span>
+                                    <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.removeField(field.id)" aria-hidden="true" data-toggle="tooltip" title="Delete!"></span>
                                     <span class="glyphicon glyphicon-align-justify btn btn-primary" aria-hidden="true" data-toggle="tooltip" title="Reorder"></span>
                                 </div>
                             </div>
@@ -52,14 +52,14 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <select class="form-control" ng-model="addNewFieldType.repeatSelect">
-                               <option ng-repeat="option in addNewFieldType.options" value="{{option.id}}">{{option.value}}</option>
+                            <select class="form-control" ng-model="model.addNewFieldType.repeatSelect">
+                               <option ng-repeat="option in model.addNewFieldType.options" value="{{option.id}}">{{option.value}}</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                         </div>
                         <div class="col-sm-4">
-                            <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="addField(addNewFieldType.repeatSelect)" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="model.addField(model.addNewFieldType.repeatSelect)" aria-hidden="true"></span>
                         </div>
                     </div>
 
@@ -76,19 +76,19 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Edit Field(for now only field labels are editable to check if field updates work)</h4>
                             </div>
-                            <div class="modal-body" ng-model="selectedField">
+                            <div class="modal-body" ng-model="model.selectedField">
                                 <div class="row">
                                     <div class ="col-sm-4">
                                         <label class="control-label">Edit Label</label>
                                     </div>
                                     <div class ="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="{{selectedField.label}}" ng-model="selectedField.label">
+                                        <input type="text" class="form-control" placeholder="{{model.selectedField.label}}" ng-model="model.selectedField.label">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" ng-click="updateField()" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-default" ng-click="model.updateField()" data-dismiss="modal">Save</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

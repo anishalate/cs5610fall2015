@@ -23,6 +23,9 @@
             $http.post("/api/assignment/form/"+formId+"/field",field)
                 .success(function(formById){
                      deferred.resolve(formById)
+            })
+                .error(function(errorMessage){
+                        deferred.resolve(errorMessage);
             });
             return deferred.promise;
         }
@@ -43,7 +46,9 @@
             $http.get("/api/assignment/form/"+formId+"/field/"+fieldId)
                 .success(function(field){
                     deferred.resolve(field);
+
             });
+
             return deferred.promise;
         }
 

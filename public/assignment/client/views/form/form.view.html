@@ -21,21 +21,21 @@
         <tr>
             <td>
                 <div class="col-sm-16">
-                    <input type="text" class="form-control" placeholder="name" ng-model="form.title">
+                    <input type="text" class="form-control" placeholder="name" ng-model="model.form.title">
                 </div>
             </td>
             <td>
-                <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="addForm()" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-ok btn btn-primary"  ng-click="updateForm()" aria-hidden="true"> </span>
+                <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="model.addForm()" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-ok btn btn-primary"  ng-click="model.updateForm()" aria-hidden="true"> </span>
             </td>
 
         </tr>
-        <tr ng-repeat ="form1 in forms">
+        <tr ng-repeat ="form1 in model.forms">
             <td>
                 <a href="#/user/{{form1.userId}}/form/{{form1.id}}/fields/">{{form1.title}}</a>
             <td>
-            <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="deleteForm(form1.id)" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-pencil btn btn-primary" ng-click="selectForm(form1.id)"aria-hidden="true"> </span>
+            <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.deleteForm(form1.id)" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-pencil btn btn-primary" ng-click="model.selectForm(form1.id)"aria-hidden="true"> </span>
             </td>
 
         </tr>
