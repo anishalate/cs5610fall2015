@@ -21,7 +21,13 @@ module.exports = function(app,model){
         if(username!==undefined && password===undefined){
             res.json(model.findUserByUsername(username));
         }
-        res.json(model.findAll());
+        model
+            .findAll()
+            .then(function(users){
+                res.json(users);
+                console.log(users);
+            });
+        //res.json(model.findAll());
     }
 
     function findById(req,res){
@@ -40,6 +46,12 @@ module.exports = function(app,model){
    }
    function createUser(req,res){
        var newUser = req.body;
-       res.json(model.createUser(newUser));
+       model
+           .createUser(newUser)
+           .then(function(user){
+               res.json(user);
+           });
+
+       //res.json(model.createUser(newUser));
    }
 }

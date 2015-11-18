@@ -37,7 +37,7 @@
         function createUser(newUser){
 
             var deferred = $q.defer();
-            newUser.id = guid();
+            //newUser.id = guid();
             $http.post("/api/assignment/user",newUser)
                 .success(function(user){
                     console.log(user);
