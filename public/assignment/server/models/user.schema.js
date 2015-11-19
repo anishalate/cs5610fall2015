@@ -6,6 +6,6 @@ module.exports = function(mongoose){
         username: String,
         password: String,
         email: String
-    },{collection: "assignment.mongodb.user"});
+    },{collection: "cs5610.assignment.user"});
     return userSchema;
 };

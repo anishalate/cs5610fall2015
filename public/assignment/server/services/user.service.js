@@ -16,33 +16,53 @@ module.exports = function(app,model){
         var password = req.param('password');
         if(username!==undefined && password != undefined){
             var credentials = {username: username, password:password};
-            res.json(model.findUserByCredentials(credentials));
+            model
+                .findUserByCredentials(credentials)
+                .then(function(user){
+                    res.json(user);
+                });
+
         }
         if(username!==undefined && password===undefined){
-            res.json(model.findUserByUsername(username));
+            model
+                .findUserByUsername(username)
+                .then(function(user){
+                    res.json(user);
+                })
         }
         model
             .findAll()
             .then(function(users){
                 res.json(users);
-                console.log(users);
+
             });
-        //res.json(model.findAll());
     }
 
     function findById(req,res){
-        res.json(model.findById(req.params.id));
+        model
+            .findById(req.params.id)
+            .then(function(user){
+               res.json(user);
+            });
 
     }
 
     function deleteUser(req,res){
 
-        res.json(model.deleteUser(req.params.id));
+        model
+            .deleteUser(req.params.id)
+            .then(function(status){
+            res.json(status);
+        });
     }
 
    function updateUser(req,res){
        var updatedUser = req.body;
-       res.json(model.updateUser(req.params.id,updatedUser));
+       model
+           .updateUser(req.params.id,updatedUser)
+           .then(function(user){
+               res.json(user);
+           });
    }
    function createUser(req,res){
        var newUser = req.body;
@@ -52,6 +72,5 @@ module.exports = function(app,model){
                res.json(user);
            });
 
-       //res.json(model.createUser(newUser));
    }
 }

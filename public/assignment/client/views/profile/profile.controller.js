@@ -20,7 +20,7 @@
 
         model.update = function(){
 
-            UserService.updateUser($rootScope.currentUser.id,model.user)
+            UserService.updateUser($rootScope.currentUser._id,model.user)
                 .then(function(user){
                     $rootScope.currentUser =user;
 

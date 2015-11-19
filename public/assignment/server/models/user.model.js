@@ -8,7 +8,7 @@ module.exports = function(db,mongoose){
     var api = {
         createUser : createUser,
         findAll : findAll,
-        findById :findById,
+       // findById :findById,
         updateUser : updateUser,
         deleteUser : deleteUser,
         findUserByUsername : findUserByUsername,
@@ -49,68 +49,78 @@ module.exports = function(db,mongoose){
     }
 
     function findById(id){
-        var userById={};
-        for(var i=0;i<users.length;i++)
-        {
-            if(users[i].id==id){
-                userById = users[i];
-                break;
+       var deferred = q.defer();
+        UserModel.findById(id,function(err,user){
+            if(err){
+                deferred.reject(err);
             }
-        }
-        return userById;
+            else{
+                deferred.resolve(user);
+            }
+        });
+        return deferred.promise;
 
     }
 
     function updateUser(id,updatedUser){
 
-        for(var i=0;i<users.length;i++)
-        {
-            if(users[i].id==id){
-                updatedUser.id = id;
-                users[i] = updatedUser;
-
-                break;
+        var deferred = q.defer();
+        UserModel.update({_id:id},{$set:updatedUser},function(err,user){
+            if(err){
+                deferred.reject(err);
             }
-        }
+            else{
+                deferred.resolve(user);
+            }
+        });
 
-        return updatedUser;
+        return deferred.promise;
+
 
     }
     function deleteUser(id){
-        for(var i=0;i<users.length;i++)
-        {
-            if(users[i].id==id){
-                users.splice(i,1);
-                break;
+        var deferred = q.defer();
+        UserModel.remove({_id:id},function(err,status){
+            if(err){
+                deferred.reject(err);
             }
-        }
-        return users;
+            else{
+                deferred.resolve(status);
+            }
+        });
+
+        return deferred.promise;
 
     }
 
     function findUserByUsername(userName){
-        var userByUserName={};
-        for(var i=0;i<users.length;i++)
-        {
-            if(users[i].username==userName){
-                userByUserName = users[i];
-                break;
+        var deferred = q.defer();
+
+        UserModel.find({username:userName},function(err,user){
+            if(err){
+                deferred.reject(err);
             }
-        }
-        return userByUserName;
+            else{
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
 
     }
 
     function findUserByCredentials(credentials){
-        var userByCredentials= {};
-        for(var i=0;i<users.length;i++)
-        {
-            if(users[i].username==credentials.username && users[i].password==credentials.password){
-                userByCredentials = users[i];
-                break;
+        var deferred = q.defer();
+        UserModel.findOne({username:credentials.username,password:credentials.password},function(err,user){
+            if(err){
+                deferred.reject(err);
             }
-        }
-        return userByCredentials;
+            else{
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
 
     }
 }

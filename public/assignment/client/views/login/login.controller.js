@@ -11,6 +11,7 @@
             UserService.findUserByUsernameAndPassword(model.username,model.password)
                 .then(function(user){
                     $rootScope.currentUser =user;
+                    console.log(user);
                     $location.path ("/profile");
                 });
         }
