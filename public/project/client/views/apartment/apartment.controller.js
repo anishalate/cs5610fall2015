@@ -1,12 +1,15 @@
 "use strict";
-(function()
-{
+(function() {
+    angular
+        .module("RoomiesApp")
+        .controller("ApartmentController", ApartmentController);
 
 
+    // init_map();
+    function ApartmentController() {
 
-       // init_map();
         function init_map() {
-            var myLocation = new google.maps.LatLng(42.3806,-71.2350);
+            var myLocation = new google.maps.LatLng(42.3806, -71.2350);
 
             var mapOptions = {
                 center: myLocation,
@@ -23,8 +26,9 @@
             marker.setMap(map);
 
         }
-
         google.maps.event.addDomListener(window, 'load', init_map);
+    }
+
 
 
 
