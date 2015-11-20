@@ -11,12 +11,15 @@ module.exports = function(db,mongoose) {
         findAll: findAll,
         findUserByCredentials:findUserByCredentials,
         deleteUser: deleteUser,
-        updateUser: updateUser
+        updateUserDetails: updateUserDetails,
+        updateUserPref :updateUserPref,
+        updateUserLifestyle :updateUserLifestyle,
+        updateUserRoommatePref :updateUserRoommatePref,
 
 
     };
 
-    return api
+    return api;
 
     function createUser(newUser){
         var deferred = q.defer();
@@ -90,9 +93,51 @@ module.exports = function(db,mongoose) {
 
     }
 
-    function updateUser(id,updatedUser){
+    function updateUserDetails(id,updatedUser){
         var deferred = q.defer();
-        UserModel.update({_id:id},{$set:updatedUser},function(err,user){
+        UserModel.update({_id:id},{$set:{userDetails:updatedUser}},function(err,user){
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+    function updateUserPref(id,updatedPref){
+        var deferred = q.defer();
+        UserModel.update({_id:id},{$set:{userPref:updatedPref}},function(err,user){
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+    function updateUserLifestyle(id,updatedLifestyle){
+        var deferred = q.defer();
+        UserModel.update({_id:id},{$set:{userLifestyle:updatedLifestyle}},function(err,user){
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+    function updateUserRoommatePref(id,updatedRoommatePref){
+        var deferred = q.defer();
+        UserModel.update({_id:id},{$set:{userRoommatePref:updatedRoommatePref}},function(err,user){
             if(err){
                 deferred.reject(err);
             }
