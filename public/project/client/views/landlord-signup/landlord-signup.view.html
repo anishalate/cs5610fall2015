@@ -22,31 +22,31 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">First Name</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" placeholder="First Name">
+                        <input type="text" class="form-control" placeholder="First Name" ng-model="landlord.firstName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Last Name</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" placeholder="Last Name">
+                        <input type="text" class="form-control" placeholder="Last Name" ng-model="landlord.lastName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-5">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" ng-model="landlord.email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Password</label>
                     <div class="col-sm-5">
-                        <input type="password" class="form-control"  placeholder="Password">
+                        <input type="password" class="form-control"  placeholder="Password" ng-model="landlord.password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">I am a</label>
                     <div class="col-sm-5">
-                            <input type="radio"  value="landlord"> Landlord    <input type="radio"  value="broker" > Broker
+                            <input type="radio"  value="landlord" ng-model="landlord.type"> Landlord    <input type="radio"  value="broker" ng-model="landlord.type" > Broker
                     </div>
                 </div>
                 <div class="form-group">
@@ -55,9 +55,9 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td> <input type="text" class="form-control "  placeholder="Zip code"></td>
-                                <td><input type="number" class="form-control "  placeholder="Beds"></td>
-                                <td> <input type="number" class="form-control"  placeholder="Bath"></td>
+                                <td> <input type="text" class="form-control "  placeholder="Zip code" ng-model="listing.zip"></td>
+                                <td><input type="number" class="form-control "  placeholder="Beds" ng-model="listing.beds"></td>
+                                <td> <input type="number" class="form-control"  placeholder="Bath" ng-model="listing.baths"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -65,8 +65,8 @@
                             <tbody>
 
                             <tr>
-                                <td> <input type="text" class="form-control "  placeholder="Rent"></td>
-                                <td><input placeholder="Available from" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  id="date"></td>
+                                <td> <input type="text" class="form-control "  placeholder="Rent" ng-model="listing.rent"></td>
+                                <td><input placeholder="Available from" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  id="date" ng-model="listing.startDate"></td>
 
                             </tr>
 
@@ -78,7 +78,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-5 col-sm-3">
-                        <a type="submit" class="btn btn-default btn-block" href="../project/landlord-profile/landlord-profile.view.html">Sign me up</a>
+                        <a type="submit" class="btn btn-default btn-block" ng-click="register()">Sign me up</a>
                     </div>
                 </div>
                 <div class="form-group">

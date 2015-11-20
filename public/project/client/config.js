@@ -25,6 +25,7 @@
                 .when("/landlord-signup",
                 {
                     templateUrl: "views/landlord-signup/landlord-signup.view.html",
+                    controller:"LandlordSignupController"
 
                 })
                 .when("/signup-form",
@@ -48,6 +49,10 @@
                 .when("/apartments",{
                     templateUrl :"views/apartment/apartment.view.html",
                     controller: "ApartmentController"
+                })
+                .when("/landlord-profile",{
+                    templateUrl :"views/landlord-profile/landlord-profile.view.html",
+
                 })
 
                 .otherwise({
