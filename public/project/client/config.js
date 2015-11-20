@@ -19,6 +19,7 @@
                 .when("/signup",
                 {
                     templateUrl: "views/signup/signup.view.html",
+                    controller: "SignupController"
 
                 })
                 .when("/landlord-signup",
@@ -29,6 +30,7 @@
                 .when("/signup-form",
                 {
                     templateUrl: "views/signup-form/signup-form.view.html",
+                    controller:"SignupFormController"
 
                 })
                 .when("/profile",{

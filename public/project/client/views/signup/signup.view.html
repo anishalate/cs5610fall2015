@@ -2,7 +2,7 @@
 <br>
 <br>
 
-<div class="col-md-6 col-md-offset-3 main">
+<div class="col-md-6 col-md-offset-3 main" ng-controller="SignupController">
       <ul class="nav nav-tabs signup-tab">
         <li role="presentation" class="active"><a href="#/signup">I am looking for Roommates</a></li>
         <li role="presentation"><a href="#/landlord-signup">I want to list property</a></li>
@@ -23,31 +23,31 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">First Name</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" placeholder="First Name">
+                    <input type="text" class="form-control" placeholder="First Name" ng-model="user.firstName" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Last Name</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" placeholder="Last Name">
+                    <input type="text" class="form-control" placeholder="Last Name" ng-model="user.lastName" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Email</label>
                 <div class="col-sm-5">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" class="form-control" placeholder="Email" ng-model="user.email" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-5">
-                    <input type="password" class="form-control"  placeholder="Password">
+                    <input type="password" class="form-control"  placeholder="Password" ng-model="user.password" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">I am looking for</label>
                 <div class="col-sm-5">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="userPref.lookingFor">
                         <option value="mates&apts">Roommates and Apartments</option>
                         <option value="mates">Roommates</option>
                         <option value="apts">Apartments</option>
@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-3">
-                    <a type="submit" class="btn btn-default btn-block" href="#/signup-form">Sign me up</a>
+                    <a type="submit" class="btn btn-default btn-block" ng-click="register()">Sign me up</a>
                 </div>
             </div>
             <div class="form-group">
