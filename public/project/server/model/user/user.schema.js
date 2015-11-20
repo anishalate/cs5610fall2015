@@ -22,7 +22,10 @@ module.exports = function(mongoose){
             zip:{type:Number},
             roomType: String,
             hasApartment: Boolean,
-            wantApartment: Boolean
+            wantApartment: Boolean,
+            lookingFor: String,
+            startDate: Date,
+            period: String,
         },
 
         userLifestyle:{

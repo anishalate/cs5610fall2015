@@ -8,21 +8,26 @@
 
     function SignupFormController($location,$scope,$rootScope) {
         $scope.user ={};
-        $scope.userPref ={};
+        $rootScope.newUser.userRoommatePref ={};
+
 
         $scope.register = function(){
 
-            for(var prop in $scope.user){
-                $rootScope.newUser[prop] = $scope.user[prop];
+            for(var prop in $scope.user.userDetails){
+                $rootScope.newUser.userDetails[prop] = $scope.user.userDetails[prop];
 
             }
-            for(var prop in $scope.userPref){
-                $rootScope.newUserPref[prop] = $scope.userPref[prop];
+            for(var prop in $scope.user.userPref){
+                $rootScope.newUser.userPref[prop] = $scope.user.userPref[prop];
+
+            }
+            for(var prop in $scope.user.userRoommatePref){
+                $rootScope.newUser.userRoommatePref[prop] = $scope.user.userRoommatePref[prop];
 
             }
 
             console.log($rootScope.newUser);
-            console.log($rootScope.newUserPref);
+
             $location.path("/profile");
         }
 
