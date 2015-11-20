@@ -4,20 +4,20 @@
         .module("RoomiesApp")
         .factory("UserService", UserService);
 
-    function UserService($rootScope,$q,$http) {
+    function UserService($q,$http) {
         // var currentUsers = [];
         var service ={
             createUser :createUser,
-            findUserByUsernameAndPassword:findUserByUsernameAndPassword,
+            findUserByEmailAndPassword:findUserByEmailAndPassword,
             findAllUsers:findAllUsers,
             deleteUserById:deleteUserById,
             updateUser:updateUser
         };
 
-        function findUserByUsernameAndPassword(username,password){
+        function findUserByEmailAndPassword(email,password){
 
             var deferred = $q.defer();
-            $http.get("/api/assignment/user?username="+username+"&password="+password)
+            $http.get("/api/assignment/user?email="+email+"&password="+password)
                 .success(function(user){
                     deferred.resolve(user);
                 });
@@ -40,7 +40,7 @@
             //newUser.id = guid();
             $http.post("/api/assignment/user",newUser)
                 .success(function(user){
-                    console.log(user);
+
                     deferred.resolve(user);
                 });
 
@@ -68,15 +68,7 @@
             return deferred.promise;
 
         }
-        function guid() {
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4();
-        }
+
         return service;
     }
 })();
