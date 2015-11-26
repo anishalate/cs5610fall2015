@@ -97,6 +97,7 @@
 
         model.cloneField = function(field){
             var cloneItem = field;
+            delete cloneItem['_id'];
             FieldService.createFieldForForm(formId,cloneItem)
                 .then(function(formById){
                     model.fields = formById.fields;
