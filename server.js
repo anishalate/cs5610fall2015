@@ -5,7 +5,15 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 //var mongooseP = require('mongoose');
-mongoose.connect('mongodb://localhost/CS5610Assignment');
+var connectionString =  'mongodb://localhost/CS5610Assignment';
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+mongoose.connect(connectionString);
 //mongooseP.connect('mongodb://localhost/CS5610Project');
 var db = mongoose.connection;
 //var dbP = mongooseP.connection;
