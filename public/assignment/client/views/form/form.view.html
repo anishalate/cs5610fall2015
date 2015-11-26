@@ -32,10 +32,10 @@
         </tr>
         <tr ng-repeat ="form1 in model.forms">
             <td>
-                <a href="#/user/{{form1.userId}}/form/{{form1.id}}/fields/">{{form1.title}}</a>
+                <a href="#/user/{{form1.userId}}/form/{{form1._id}}/fields/">{{form1.title}}</a>
             <td>
-            <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.deleteForm(form1.id)" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-pencil btn btn-primary" ng-click="model.selectForm(form1.id)"aria-hidden="true"> </span>
+            <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.deleteForm(form1._id)" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-pencil btn btn-primary" ng-click="model.selectForm(form1._id)"aria-hidden="true"> </span>
             </td>
 
         </tr>

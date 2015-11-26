@@ -17,7 +17,7 @@
 
         function init(){
             model.forms = [];
-            FormService.findAllFormsForUser($rootScope.currentUser.id)
+            FormService.findAllFormsForUser($rootScope.currentUser._id)
                 .then(function(allFormsByUser){
                 model.forms= allFormsByUser;
                 });
@@ -28,7 +28,7 @@
             model.newForm.title = model.form.title;
             model.newForm.fields = [];
 
-            FormService.createFormForUser($rootScope.currentUser.id,model.newForm)
+            FormService.createFormForUser($rootScope.currentUser._id,model.newForm)
                 .then(function(allForms){
                   init();
                 })
@@ -51,7 +51,7 @@
 
         model.selectForm = function(formId){
            for(var i=0;i<model.forms.length;i++){
-               if(model.forms[i].id===formId){
+               if(model.forms[i]._id===formId){
                    model.form= model.forms[i];
                    break;
                }
@@ -61,7 +61,7 @@
             model.newForm = {};
             model.newForm.title = model.form.title;
             model.newForm.fields = model.form.fields;
-            FormService.updateFormById(model.form.id,model.newForm)
+            FormService.updateFormById(model.form._id,model.newForm)
                 .then(function(allForms){
                     //add something for callback later on.
                 init();

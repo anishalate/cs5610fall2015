@@ -11,7 +11,7 @@
                                     <label class="control-label">{{field.label}}</label>
                                 </div>
                             </div>
-                            <div class="row" ng-switch="field.type">
+                            <div class="row" ng-switch="field.fieldType">
                                 <div class="col-sm-4" ng-switch-when="OPTIONS">
                                     <select class="form-control">
                                         <option ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
@@ -31,14 +31,14 @@
                                 </div>
 
                                 <div class="col-sm-4" ng-switch-default>
-                                    <input type="{{field.type}}" class="form-control" placeholder="{{field.placeholder}}">
+                                    <input type="{{field.fieldType}}" class="form-control" placeholder="{{field.placeholder}}">
                                 </div>
                                 <div class="col-sm-4">
                                 </div>
                                 <div class="col-sm-4">
-                                    <span class="glyphicon glyphicon-pencil btn btn-primary" aria-hidden="true" ng-click="model.showModal(field.id)" data-toggle="tooltip"  title="Edit!"></span>
+                                    <span class="glyphicon glyphicon-pencil btn btn-primary" aria-hidden="true" ng-click="model.showModal(field._id)" data-toggle="tooltip"  title="Edit!"></span>
                                     <span class="glyphicon glyphicon-plus btn btn-primary" ng-click="model.cloneField(field)" aria-hidden="true" data-toggle="tooltip" title="Clone"></span>
-                                    <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.removeField(field.id)" aria-hidden="true" data-toggle="tooltip" title="Delete!"></span>
+                                    <span class="glyphicon glyphicon-remove btn btn-danger" ng-click="model.removeField(field._id)" aria-hidden="true" data-toggle="tooltip" title="Delete!"></span>
                                     <span class="glyphicon glyphicon-align-justify btn btn-primary" aria-hidden="true" data-toggle="tooltip" title="Reorder"></span>
                                 </div>
                             </div>

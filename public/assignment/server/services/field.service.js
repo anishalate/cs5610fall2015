@@ -7,27 +7,46 @@ module.exports = function(app,model) {
     app.put("/api/assignment/form/:formId/field/:fieldId",updateField);
 
     function findAllFields(req,res){
-        res.json(model.findAllFormFields(req.params.formId));
+        model
+            .findAllFormFields(req.params.formId)
+            .then(function(fields){
+                res.json(fields);
+            });
     }
 
     function findField(req,res){
-        res.json(model.findFormField(req.params.formId, req.params.fieldId));
+       model
+           .findFormField(req.params.formId, req.params.fieldId)
+           .then(function(field){
+               res.json(field);
+           });
     }
 
     function deleteField(req,res){
-        res.json(model.deleteFormField(req.params.formId,req.params.fieldId));
+        model
+            .deleteFormField(req.params.formId,req.params.fieldId)
+            .then(function(status){
+                res.json(status);
+            });
 
     }
 
     function createField(req,res){
         var field = req.body;
-        res.json(model.createFormField(req.params.formId,field));
-
+       model
+           .createFormField(req.params.formId,field)
+           .then(function(field){
+               res.json(field);
+           });
     }
 
     function updateField(req,res){
         var updatedField = req.body;
-        res.json(model.updateFormField(req.params.formId,req.params.fieldId,updatedField));
+        model
+            .updateFormField(req.params.formId,req.params.fieldId,updatedField)
+            .then(function(form){
+                res.json(form);
+            })
 
     }
 }

@@ -8,27 +8,48 @@ module.exports = function(app,model){
 
 
     function getFormById(req,res){
-        res.json(model.findById(req.params.formId));
+        model
+            .findById(req.params.formId)
+            .then(function(form){
+                res.json(form);
+            });
+
     }
 
     function findFormByUser(req,res){
-        res.json(model.findFormByUserId(req.params.userId));
+       model
+           .findFormByUserId(req.params.userId)
+           .then(function(forms){
+               res.json(forms);
+           })
 
     }
 
     function deleteForm(req,res){
-        res.json(model.deleteForm(req.params.formId));
+       model
+           .deleteForm(req.params.formId)
+           .then(function(status){
+               res.json(status);
+           });
 
     }
 
     function createForm(req,res){
         var form = req.body;
-        res.json(model.createForm(form));
+        model
+            .createForm(form)
+            .then(function(newForm){
+                res.json(newForm);
+            })
 
     }
     function updateForm(req,res){
         var form = req.body;
-        res.json(model.updateForm(req.params.formId,form));
+        model
+            .updateForm(req.params.formId,form)
+            .then(function(updatedForm){
+                res.json(updatedForm);
+            })
 
     }
 

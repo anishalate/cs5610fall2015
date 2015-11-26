@@ -8,7 +8,7 @@ module.exports = function(db,mongoose){
     var api = {
         createUser : createUser,
         findAll : findAll,
-       // findById :findById,
+        findById :findById,
         updateUser : updateUser,
         deleteUser : deleteUser,
         findUserByUsername : findUserByUsername,
