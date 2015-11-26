@@ -10,8 +10,12 @@
 
             UserService.findUserByUsernameAndPassword(model.username,model.password)
                 .then(function(user){
+                    if(user==null){
+                        alert("User not found. Please check username and/or password");
+                        return;
+                    }
                     $rootScope.currentUser =user;
-                    console.log(user);
+
                     $location.path ("/profile");
                 });
         }

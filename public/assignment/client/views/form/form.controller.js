@@ -27,7 +27,10 @@
             model.newForm ={};
             model.newForm.title = model.form.title;
             model.newForm.fields = [];
-
+            if($rootScope.currentUser==undefined){
+                alert("Please Register/Login to create new forms");
+                return;
+            }
             FormService.createFormForUser($rootScope.currentUser._id,model.newForm)
                 .then(function(allForms){
                   init();

@@ -74,6 +74,10 @@
 
             }
            // model.fields.push(newField);
+            if(formId==undefined||formId.length<=0){
+                alert("Please select a form from forms tab");
+                return;
+            }
             FieldService.createFieldForForm(formId,newField)
                 .then(function(formById){
                     model.fields = formById.fields;
