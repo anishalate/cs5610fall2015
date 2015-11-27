@@ -14,8 +14,12 @@
                         alert("User not found. Please check username and/or password");
                         return;
                     }
-                    $rootScope.currentUser =user;
-
+                    if(user===Array){
+                        $rootScope.currentUser = user[0];
+                    }
+                    else {
+                        $rootScope.currentUser = user;
+                    }
                     $location.path ("/profile");
                 });
         }
