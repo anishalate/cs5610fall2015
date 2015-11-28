@@ -6,15 +6,25 @@
 
 
 
-    function LandlordSignupController($location,$scope,$rootScope) {
+    function LandlordSignupController($location,$scope,$rootScope,LandlordService,ListingService) {
         $scope.landlord ={};
         $scope.listing ={};
 
 
         $scope.register = function(){
+            LandlordService.createLandlord($scope.landlord)
+                .then(function(landlord){
+                    $rootScope.currentLandlord = landlord;
+
+                    ListingService.createListing(landlord._id,$scope.listing)
+                        .then(function(listing){
+                            $rootScope.currentListing = listing;
+                            $location.path("/landlord-profile");
+                        })
+                });
 
 
-            $location.path("/landlord-profile");
+
         }
 
 
@@ -24,6 +34,4 @@
 
 
 
-})();/**
- * Created by Anish on 11/20/2015.
- */
+})();

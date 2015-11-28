@@ -8,7 +8,8 @@ module.exports = function(mongoose){
             email: String,
             phone: {type: Number},
             listings: [listingSchema],
-            isLandLord:Boolean
+            type:{type: String,
+            enum:["Landlord","Broker"]}
 
     },{collection: "cs5610.project.landlord"});
     return landlordSchema;

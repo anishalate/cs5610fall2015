@@ -6,7 +6,7 @@
 
 
 
-    function SignInController($location,$scope,$rootScope,UserService) {
+    function SignInController($location,$scope,$rootScope,UserService,LandlordService) {
 
         $scope.signin = function(){
 
@@ -36,7 +36,15 @@
             else
             {
                 if($scope.isLandlord=="yes"){
-                    console.log("Is landlord login");
+                    LandlordService.findLandlordByCredentials($scope.email,$scope.password)
+                        .then(function(landlord){
+                            if(landlord==null){
+                                alert("User not found, Please check email and/or password");
+                                return;
+                            }
+                            $rootScope.currentLandlord =landlord;
+                            $location.path("/landlord-profile");
+                        })
                 }
             }
         }
