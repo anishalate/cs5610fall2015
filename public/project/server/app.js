@@ -7,5 +7,6 @@ module.exports = function(app,mongoose,db){
 
     var landlordModel = require("./model/landlord/landlord.model.js")(db,mongoose);
     require("./services/landlord.service.js")(app,landlordModel);
+    require("./services/listing.service.js")(app,landlordModel);
 
 };
