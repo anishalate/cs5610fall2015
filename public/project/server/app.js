@@ -2,11 +2,10 @@
 
 module.exports = function(app,mongoose,db){
 
-
-    var userModel = require("./models/user/user.model.js")(db,mongoose);
-   // var formModel = require("./models/form.model.js")(app);
+    var userModel = require("./model/user/user.model.js")(db,mongoose);
     require("./services/user.service.js")(app,userModel);
-  //  require("./services/form.service.js")(app,formModel);
-   // require("./services/field.service.js")(app,formModel);
+
+    var landlordModel = require("./model/landlord/landlord.model.js")(db,mongoose);
+    require("./services/landlord.service.js")(app,landlordModel);
 
 };

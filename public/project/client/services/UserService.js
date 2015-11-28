@@ -17,7 +17,7 @@
         function findUserByEmailAndPassword(email,password){
 
             var deferred = $q.defer();
-            $http.get("/api/assignment/user?email="+email+"&password="+password)
+            $http.get("/api/project/user?email="+email+"&password="+password)
                 .success(function(user){
                     deferred.resolve(user);
                 });
@@ -27,7 +27,7 @@
 
         function findAllUsers(){
             var deferred = $q.defer();
-            $http.get("/api/assignment/user")
+            $http.get("/api/project/user")
                 .success(function(users){
                     deferred.resolve(users);
                 });
@@ -38,7 +38,7 @@
 
             var deferred = $q.defer();
             //newUser.id = guid();
-            $http.post("/api/assignment/user",newUser)
+            $http.post("/api/project/user",newUser)
                 .success(function(user){
 
                     deferred.resolve(user);
@@ -50,7 +50,7 @@
         }
         function deleteUserById(id){
             var deferred = $q.defer();
-            $http.delete("/api/assignment/user/"+id)
+            $http.delete("/api/project/user/"+id)
                 .success(function(users){
                     deferred.resolve(users);
                 });
@@ -60,7 +60,7 @@
 
         function updateUser(id,updateUser){
             var deferred = $q.defer();
-            $http.put("/api/assignment/user/"+id,updateUser)
+            $http.put("/api/project/user/"+id,updateUser)
                 .success(function(user){
                     deferred.resolve(user);
                 });

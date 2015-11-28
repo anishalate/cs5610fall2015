@@ -14,6 +14,7 @@
                 .when("/signin",
                 {
                     templateUrl: "views/signin/signin.view.html",
+                    controller:"SignInController"
 
                 })
                 .when("/signup",

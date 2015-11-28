@@ -1,10 +1,10 @@
 module.exports = function(app,model){
 
-    app.get("/api/assignment/user", find );
-    app.get("/api/assignment/user/:id",findById);
-    app.delete("/api/assignment/user/:id",deleteUser);
-    app.put("/api/assignment/user/:id",updateUser);
-    app.post("/api/assignment/user",createUser);
+    app.get("/api/project/user", find );
+    app.get("/api/project/user/:id",findById);
+    app.delete("/api/project/user/:id",deleteUser);
+    app.put("/api/project/user/:id",updateUser);
+    app.post("/api/project/user",createUser);
 
 
     function find(req,res){
@@ -13,6 +13,7 @@ module.exports = function(app,model){
         var password = req.param('password');
         if(email!==undefined && password != undefined){
             var credentials = {email: email, password:password};
+
             model
                 .findUserByCredentials(credentials)
                 .then(function(user){

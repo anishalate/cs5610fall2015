@@ -1,5 +1,4 @@
 var q = require("q");
-//var users = require("./user.mock.json");
 module.exports = function(db,mongoose) {
 
     var userSchema = require("./user.schema.js")(mongoose);
@@ -37,6 +36,7 @@ module.exports = function(db,mongoose) {
 
     function findUserById(id){
         var deferred = q.defer();
+
         UserModel.findById(id,function(err,user){
             if(err){
                 deferred.reject(err);
@@ -65,7 +65,8 @@ module.exports = function(db,mongoose) {
 
     function findUserByCredentials(credentials){
         var deferred = q.defer();
-        UserModel.findOne({username:credentials.email,password:credentials.password},function(err,user){
+
+        UserModel.findOne({'userDetails.email':credentials.email,'userDetails.password':credentials.password},function(err,user){
             if(err){
                 deferred.reject(err);
             }

@@ -6,7 +6,7 @@
 
 
 
-    function SignupFormController($location,$scope,$rootScope) {
+    function SignupFormController($location,$scope,$rootScope,UserService) {
         $scope.user ={};
         $rootScope.newUser.userRoommatePref ={};
 
@@ -25,7 +25,10 @@
                 $rootScope.newUser.userRoommatePref[prop] = $scope.user.userRoommatePref[prop];
 
             }
-
+            UserService.createUser($rootScope.newUser)
+                .then(function(newUser){
+                    $rootScope.currentUser = newUser;
+                })
             console.log($rootScope.newUser);
 
             $location.path("/profile");
