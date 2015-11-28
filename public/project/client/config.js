@@ -37,6 +37,7 @@
                 })
                 .when("/profile",{
                     templateUrl :"views/user-profile/user-profile.view.html",
+                    controller:"UserProfileController"
                 })
                 .when("/profile-likes",{
                     templateUrl :"views/user-profile/user-profile-likes.view.html",

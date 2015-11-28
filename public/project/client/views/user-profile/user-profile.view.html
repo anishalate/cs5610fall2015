@@ -12,10 +12,11 @@
                         </div>
                         <!--/col-->
                         <div class="col-xs-12 col-sm-6">
-                            <h2>Jon Doe</h2>
-                            <p><strong>Age: </strong> 26 years </p>
-                            <p><strong>Looking for: </strong> Roommates and Apartments. </p>
+                            <h2>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h2>
+                            <p><strong>Age: </strong> {{user.userDetails.age}} years </p>
+                            <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
                             <p><strong>Near: </strong>
+                                <span class="label label-info tags">{{user.userPref.zip}}</span>
                                 <span class="label label-info tags">Newton,MA</span>
                                 <span class="label label-info tags">Waltham,MA</span>
                                 <span class="label label-info tags">Auburndale,MA</span>
@@ -49,16 +50,16 @@
         <li role="presentation" class="active"><a href="#/profile">About</a></li>
         <li role="presentation"><a href="#/profile-likes">Likes</a></li>
     </ul>
-    <div class="table-responsive" contenteditable>
-        <table class="table table-striped table-bordered">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" ng-show="showDisplay">
         <thead>
         <th>Preferences</th>
         <th>My Details
-            <button type="button" class="btn btn-default btn-sm">
+            <button type="button" class="btn btn-default btn-sm" ng-click="edit()">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
             </button></th>
         <th>Roommate Preference
-            <button type="button" class="btn btn-default btn-sm">
+            <button type="button" class="btn btn-default btn-sm" ng-click="edit()">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
             </button></th>
         </thead>
@@ -66,62 +67,138 @@
         <tbody>
         <tr>
             <td> Employment </td>
-            <td> Student  </td>
-            <td> Any </td>
+            <td>{{user.userDetails.employment}}  </td>
+            <td> {{user.userRoommatePref.employment}} </td>
         </tr>
         <tr>
             <td> Education </td>
-            <td> Masters </td>
-            <td> College </td>
+            <td>{{user.userDetails.education}}   </td>
+            <td>{{user.userRoommatePref.education}}</td>
         </tr>
         <tr>
             <td> Smoke </td>
-            <td> No </td>
-            <td> No </td>
+            <td>{{user.userLifestyle.smoke}}  </td>
+            <td> {{user.userRoommatePref.smoke}} </td>
         </tr>
         <tr>
             <td> Late Night Parties </td>
-            <td> Sometimes </td>
-            <td> SOmetimes </td>
+            <td>{{user.userLifestyle.parties}} </td>
+            <td> {{user.userRoommatePref.parties}} </td>
         </tr>
         <tr>
             <td> Drug Usage </td>
-            <td> No </td>
-            <td> No </td>
+            <td>{{user.userLifestyle.drugs}}</td>
+            <td> {{user.userRoommatePref.pets}} </td>
         </tr>
         <tr>
             <td> Food Preference </td>
-            <td> Veg-Non Veg </td>
-            <td> Any</td>
+            <td> {{user.userLifestyle.food}} </td>
+            <td> {{user.userRoommatePref.food}}</td>
         </tr>
         <tr>
             <td> Alcohol </td>
-            <td> Yes </td>
-            <td> Any </td>
+            <td>{{user.userLifestyle.alcohol}}  </td>
+            <td> {{user.userRoommatePref.alcohol}} </td>
         </tr>
         <tr>
             <td> Language</td>
             <td>
-                <span class="label label-info tags">English</span>
-                <span class="label label-info tags">Hindi</span>
-                <span class="label label-info tags">Marathi</span>
+                <div ng-repeat="language in user.userDetails.languages">
+                    <span class="label label-info tags">{{language}}</span>
+                </div>
             </td>
-            <td>Any</td>
+            <td><div ng-repeat="language in user.userRoommatePref.languages">
+                <span class="label label-info tags">{{language}}</span>
+            </div></td>
         </tr>
         <tr>
             <td> Hometown </td>
-            <td> Boston </td>
-            <td> Any </td>
+            <td>{{user.userDetails.hometown}}  </td>
+            <td> {{user.userRoommatePref.hometown}} </td>
 
         </tr>
         <tr>
             <td> Pets </td>
-            <td> No </td>
-            <td> Dogs OK </td>
+            <td>{{user.userLifestyle.pets}}  </td>
+            <td> {{user.userRoommatePref.pets}}</td>
         </tr>
 
         </tbody>
     </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" ng-show="showEdit">
+                <thead>
+                <th>Preferences</th>
+                <th>My Details
+                    <button type="button" class="btn btn-default btn-sm" ng-click="updatePref()">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
+                    </button></th>
+                <th>Roommate Preference
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
+                    </button></th>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td> Employment </td>
+                    <td>
+                        <input type="text" ng-model="user.userDetails.employment" placeholder="Profession" >  </td>
+                    <td>
+                        <input type="text" ng-model="user.userRoommatePref.employment" placeholder="Profession" >  </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Education </td>
+                    <td><input type="text" ng-model="user.userDetails.education" placeholder="Highest Degree of education">  </td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.education" placeholder="Highest Degree of education"> </td>
+                </tr>
+                <tr>
+                    <td> Smoke </td>
+                    <td><input type="text" ng-model="user.userLifestyle.smoke" placeholder="Yes/No/Sometimes">  </td>
+                    <td><input type="text" ng-model="user.userRoommatePref.smoke" placeholder="Yes/No/Sometimes">   </td>
+                </tr>
+                <tr>
+                    <td> Late Night Parties </td>
+                    <td><input type="text" ng-model="user.userLifestyle.parties" placeholder="Yes/No/Sometimes"> </td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.parties" placeholder="Yes/No/Sometimes"> </td>
+                </tr>
+                <tr>
+                    <td> Drug Usage </td>
+                    <td><input type="text" ng-model="user.userLifestyle.drugs" placeholder="Yes/No/Sometimes"></td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.drugs" placeholder="Yes/No/Sometimes"> </td>
+                </tr>
+                <tr>
+                    <td> Food Preference </td>
+                    <td><input type="text" ng-model="food" placeholder="Input comma-separated" > </td>
+                    <td> <input type="text" ng-model="food1" placeholder="Input comma-separated" ></td>
+                </tr>
+                <tr>
+                    <td> Alcohol </td>
+                    <td><input type="text" ng-model="user.userLifestyle.alcohol" placeholder="Yes/No/Sometimes"> </td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.alcohol" placeholder="Yes/No/Sometimes"> </td>
+                </tr>
+                <tr>
+                    <td> Languages</td>
+                    <td>
+                        <input type="text" ng-model="languages" placeholder="Input comma-separated">
+                    </td>
+                    <td> <input type="text" ng-model="languages1" placeholder="Input comma-separated"></td>
+                </tr>
+                <tr>
+                    <td> Hometown </td>
+                    <td><input type="text" ng-model="user.userDetails.hometown" placeholder="Hometown"> </td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.hometown" placeholder="Hometown"> </td>
+
+                </tr>
+                <tr>
+                    <td> Pets </td>
+                    <td><input type="text" ng-model="user.userLifestyle.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
+                    <td> <input type="text" ng-model="user.userRoommatePref.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
+                </tr>
+
+                </tbody>
+            </table>
         </div>
 </div>
 <div class="container">
@@ -131,13 +208,26 @@
                 <div class="panel-body">
 
                         <!--/col-->
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6" ng-show="editContactInfo">
                             <h2>Contact Details
-                                <button type="button" class="btn btn-default btn-sm">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="editContact()">
                                 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Edit
                             </button></h2>
-                            <p><strong>Email: </strong> abc@xyz.com </p>
-                            <p><strong>Phone </strong> 0123456789 </p>
+                            <div>
+                                <p><strong>Email: </strong> {{user.userDetails.email}} </p>
+                                <p><strong>Phone </strong>  {{user.userDetails.phone}} </p>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6" ng-show="!editContactInfo">
+                            <h2>Contact Details
+                                <button type="button" class="btn btn-default btn-sm" ng-click="saveContact()">
+                                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
+                                </button></h2>
+                            <div>
+                                <p><input type="email" ng-model="user.userDetails.email" placeholder="email"> </p>
+                                <p><input type="tel" ng-model="user.userDetails.phone" placeholder="phone"></p>
+                            </div>
 
                         </div>
                         <div class="col-xs-12 col-sm-3">

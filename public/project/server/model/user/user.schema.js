@@ -49,7 +49,9 @@ module.exports = function(mongoose){
             parties: String,
             education: String,
             pets: String,
-            drugs: String
+            drugs: String,
+            employment:String,
+            food:String
         }
 
 

@@ -10,7 +10,7 @@ module.exports = function(db,mongoose) {
         findAll: findAll,
         findUserByCredentials:findUserByCredentials,
         deleteUser: deleteUser,
-        updateUserDetails: updateUserDetails,
+        updateUser: updateUser,
         updateUserPref :updateUserPref,
         updateUserLifestyle :updateUserLifestyle,
         updateUserRoommatePref :updateUserRoommatePref,
@@ -94,9 +94,9 @@ module.exports = function(db,mongoose) {
 
     }
 
-    function updateUserDetails(id,updatedUser){
+    function updateUser(id,updatedUser){
         var deferred = q.defer();
-        UserModel.update({_id:id},{$set:{userDetails:updatedUser}},function(err,user){
+        UserModel.update({_id:id},{$set:updatedUser},function(err,user){
             if(err){
                 deferred.reject(err);
             }
