@@ -54,6 +54,7 @@
                 })
                 .when("/landlord-profile",{
                     templateUrl :"views/landlord-profile/landlord-profile.view.html",
+                    controller: "LandlordProfileController"
 
                 })
 

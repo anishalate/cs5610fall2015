@@ -15,7 +15,7 @@
             LandlordService.createLandlord($scope.landlord)
                 .then(function(landlord){
                     $rootScope.currentLandlord = landlord;
-
+                    $scope.listing.userId = landlord._id;
                     ListingService.createListing(landlord._id,$scope.listing)
                         .then(function(listing){
                             $rootScope.currentListing = listing;
