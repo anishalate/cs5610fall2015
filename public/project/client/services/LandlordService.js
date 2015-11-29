@@ -11,9 +11,19 @@
             findLandlordByCredentials:findLandlordByCredentials,
             findAllLandlords:findAllLandlords,
             deleteLandlordById:deleteLandlordById,
-            updateLandlord:updateLandlord
+            updateLandlord:updateLandlord,
+            findById:findById
         };
 
+        function findById(id){
+            var deferred =$q.defer();
+
+            $http.get("/api/project/landlord/"+id)
+                .success(function(landlord){
+                    deferred.resolve(landlord);
+                });
+            return deferred.promise;
+        }
         function findLandlordByCredentials(email,password){
 
             var deferred = $q.defer();

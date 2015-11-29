@@ -57,9 +57,9 @@
             return deferred.promise;
         }
 
-        function updateListing(landlordId,listingId,updatedLandlord){
+        function updateListing(landlordId,listingId,updatedListing){
             var deferred = $q.defer();
-            $http.put("/api/project/landlord/"+landlordId+"/listing/"+listingId,updatedLandlord)
+            $http.put("/api/project/landlord/"+landlordId+"/listing/"+listingId,updatedListing)
                 .success(function(listing){
                     deferred.resolve(listing);
                 });

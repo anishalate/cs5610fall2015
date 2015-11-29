@@ -5,33 +5,47 @@
         .controller("ApartmentController", ApartmentController);
 
 
-    // init_map();
-    function ApartmentController() {
 
-        function init_map() {
-            var myLocation = new google.maps.LatLng(42.3806, -71.2350);
+    function ApartmentController($scope,$rootScope,LandlordService,ListingService,$location) {
+        $scope.listing={};
+        $scope.landlord={};
+        $scope.editListingInfo= true;
+        $scope.isLandlord = false;
+        $scope.amenities="";
+        init();
+        function init(){
 
-            var mapOptions = {
-                center: myLocation,
-                zoom: 14
-            };
-
-            var marker = new google.maps.Marker({
-                position: myLocation,
-            });
-
-            var map = new google.maps.Map(document.getElementById("map1"),
-                mapOptions);
-
-            marker.setMap(map);
+            if($rootScope.currentUser===undefined&&$rootScope.currentLandlord===undefined){
+                $location.path("/signin");
+                return; 
+            }
+            $scope.listing = $rootScope.currentListing;
+            var userId = $rootScope.currentListing.userId;
+            if($rootScope.currentLandlord!==undefined){
+                $scope.isLandlord=true;
+            }
+            LandlordService.findById(userId)
+                .then(function(landlord){
+                    $scope.landlord= landlord;
+                });
 
         }
-        google.maps.event.addDomListener(window, 'load', init_map);
+
+        $scope.editListing=function(){
+            $scope.editListingInfo = false;
+        }
+
+        $scope.saveListing = function(){
+            if( $scope.amenities.length>1) {
+                $scope.listing.amenities = $scope.amenities.split(",");
+            }
+            ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
+                .then(function(listing){
+                    $scope.editListingInfo=true;
+            });
+
+        }
     }
-
-
-
-
 
 
 
