@@ -7,8 +7,18 @@
                 <div class="panel-body profile-info">
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 text-center">
-                            <img src="http://api.randomuser.me/portraits/men/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
 
+                                <img ng-src= "{{profilePicUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+
+                            <div ng-show="!showUpload">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="editPic()">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Photo
+                                </button>
+                            </div>
+                            <div ng-show="showUpload">
+                                <input type="file" accept="image/*" id="imgFile" />
+                                <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-upload" ng-click="uploadPic()"></button>
+                            </div>
                         </div>
                         <!--/col-->
                         <div class="col-xs-12 col-sm-6">
