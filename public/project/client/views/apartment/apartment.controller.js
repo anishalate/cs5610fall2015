@@ -2,7 +2,19 @@
 (function() {
     angular
         .module("RoomiesApp")
+        .directive('imageonload', function() {
+            return {
+                restrict: 'A',
+                link: function($scope, element, attrs) {
+                    element.bind('load', function() {
+                        //call the function that was passed
+                        $scope.$apply(attrs.imageonload);
+                    });
+                }
+            };
+        })
         .controller("ApartmentController", ApartmentController);
+
 
 
 
@@ -12,13 +24,24 @@
         $scope.editListingInfo= true;
         $scope.isLandlord = false;
         $scope.amenities="";
+        $scope.showUpload=false;
+        $scope.sizeLimit      = 5292880; //5MB in Bytes
+        $scope.uploadProgress = 0;
+        $scope.creds = {
+            bucket: 'cs5610anish',
+            access_key: 'AKIAJNX74V2SPUBGSRLQ',
+            secret_key: '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'
+        };
+        $scope.imgsrc="";
         init();
         function init(){
 
             if($rootScope.currentUser===undefined&&$rootScope.currentLandlord===undefined){
                 $location.path("/signin");
-                return; 
+                return;
             }
+            AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
+            AWS.config.region = 'us-east-1';
             $scope.listing = $rootScope.currentListing;
             var userId = $rootScope.currentListing.userId;
             if($rootScope.currentLandlord!==undefined){
@@ -45,6 +68,88 @@
             });
 
         }
+
+        $scope.addPhotos = function(){
+            $scope.showUpload=true;
+        }
+        $scope.uploadPic = function(){
+            var selectedFile = document.getElementById('imgFile').files[0];
+            console.log(selectedFile.name + selectedFile.size);
+
+
+            var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
+
+            if(selectedFile) {
+                // Perform File Size Check First
+                var fileSize = Math.round(parseInt(selectedFile.size));
+                if (fileSize > $scope.sizeLimit) {
+                    alert("Please select files less than 5MB")
+                    return false;
+                }
+                // Prepend Unique String To Prevent Overwrites
+                var uniqueFileName = $scope.listing._id+Date.now().toString();
+
+                var params = { Key: uniqueFileName, ContentType: selectedFile.type, Body: selectedFile,ACL:'public-read' };
+                /* if($scope.user.userDetails.profilePicUrl!==undefined){
+                 bucket.deleteObject({Key:$scope.user.userDetails.profilePicUrl},function(err,data){
+
+                 });
+                 }*/
+
+                bucket.putObject(params, function(err, data) {
+                    if(err) {
+                        alert(err);
+                        return false;
+                    }
+                    else {
+
+                        // Upload Successfully Finished
+                        // Reset The Progress Bar
+                        setTimeout(function() {
+                            $scope.uploadProgress = 0;
+                            $scope.$digest();
+                        }, 4000);
+                    }
+                })
+                    .on('httpUploadProgress',function(progress) {
+                        $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
+                        $scope.$digest();
+                        $scope.listing.photosUrl.push(uniqueFileName);
+                        ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
+                            .then(function(listing){
+
+                            });
+
+
+
+                    });
+            }
+            else {
+                // No File Selected
+                alert('Please select a file to upload');
+            }
+
+
+
+
+            $scope.showUpload= false;
+
+
+
+        }
+        $scope.generatePicUrl =function(imageKey){
+            var s3 = new AWS.S3();
+            var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};
+            var url = s3.getSignedUrl('getObject', params, function (err, url) {
+                if (url){
+                    console.log("The URL is", url);
+                   $scope.imgsrc=url;
+                }
+            });
+
+        }
+
+
     }
 
 

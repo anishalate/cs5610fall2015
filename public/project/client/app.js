@@ -2,5 +2,5 @@
 (function()
 {
     angular
-        .module("RoomiesApp", ["ngRoute"]);
+        .module("RoomiesApp",["ngRoute"]);
 })();

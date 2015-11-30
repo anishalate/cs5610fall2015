@@ -89,7 +89,7 @@ module.exports = function(db,mongoose) {
     function updateListing(landlordId,listingId,updatedListing){
         var deferred = q.defer();
 
-        LandlordModel.update({_id:landlordId, 'listings._id':listingId},{$set:{'fields.$': updatedListing}},function(err,listing){
+        LandlordModel.update({_id:landlordId, 'listings._id':listingId},{$set:{'listings.$': updatedListing}},function(err,listing){
             if(err){
                 deferred.reject(err);
             }
