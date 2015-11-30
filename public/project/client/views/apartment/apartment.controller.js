@@ -25,6 +25,7 @@
         $scope.isLandlord = false;
         $scope.amenities="";
         $scope.showUpload=false;
+        $scope.editAdd=false;
         $scope.sizeLimit      = 5292880; //5MB in Bytes
         $scope.uploadProgress = 0;
         $scope.creds = {
@@ -34,6 +35,7 @@
         };
         $scope.imgsrc="";
         init();
+
         function init(){
 
             if($rootScope.currentUser===undefined&&$rootScope.currentLandlord===undefined){
@@ -51,11 +53,23 @@
                 .then(function(landlord){
                     $scope.landlord= landlord;
                 });
+            initMap();
 
         }
 
         $scope.editListing=function(){
             $scope.editListingInfo = false;
+        }
+        $scope.editAddress = function(){
+            $scope.editAdd= true;
+        }
+
+        $scope.saveAddress = function(){
+            ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
+                .then(function(listing){
+                    $scope.editAdd=false;
+                    initMap();
+                });
         }
 
         $scope.saveListing = function(){
@@ -65,6 +79,7 @@
             ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                 .then(function(listing){
                     $scope.editListingInfo=true;
+                    initMap();
             });
 
         }
@@ -149,8 +164,36 @@
 
         }
 
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            var latitude=0;
+            var longitude=0;
+            var address = "";
+            if($scope.listing.address===undefined){
+                address = $scope.listing.zip.toString();
+            }
 
+
+            else{
+                address=$scope.listing.address;
+            }
+
+            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    latitude = results[0].geometry.location.lat();
+                    longitude = results[0].geometry.location.lng();
+                    var map = new google.maps.Map(document.getElementById('map1'), {
+                        center: {lat: latitude, lng: longitude},
+                        zoom:15
+                    });
+                }
+            });
+
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
     }
+
 
 
 
