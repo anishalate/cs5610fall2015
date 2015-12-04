@@ -18,7 +18,7 @@
 
 
 
-    function ApartmentController($scope,$rootScope,LandlordService,ListingService,$location) {
+    function ApartmentController($scope,$rootScope,LandlordService,ListingService,$location,$q) {
         $scope.listing={};
         $scope.landlord={};
         $scope.editListingInfo= true;
@@ -34,6 +34,7 @@
             secret_key: 'ou5ZuoUfmXjTF5ORuLwZMz4BnUp3w2A+g02eaTva'
         };
         $scope.imgsrc="";
+        $scope.images=[];
         init();
 
         function init(){
@@ -46,6 +47,13 @@
             AWS.config.region = 'us-east-1';
             $scope.listing = $rootScope.currentListing;
             var userId = $rootScope.currentListing.userId;
+            for(var i=0;i<$scope.listing.photosUrl.length;i++){
+                generatePicUrl1($scope.listing.photosUrl[i])
+                    .then(function(url){
+                        $scope.images.push({url:url});
+                    })
+
+            }
             if($rootScope.currentLandlord!==undefined){
                 $scope.isLandlord=true;
             }
@@ -152,6 +160,9 @@
 
 
         }
+        $scope.openLightboxModal = function (index) {
+            Lightbox.openModal($scope.images, index);
+        }
         $scope.generatePicUrl =function(imageKey){
             var s3 = new AWS.S3();
             var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};
@@ -162,6 +173,19 @@
                 }
             });
 
+        };
+
+        function generatePicUrl1(imageKey){
+            var deferred = $q.defer();
+            var s3 = new AWS.S3();
+            var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};
+            var url = s3.getSignedUrl('getObject', params, function (err, url) {
+                if (url){
+                    console.log("The URL is", url);
+                    deferred.resolve(url);
+                }
+            });
+            return deferred.promise;
         }
 
         function initMap() {

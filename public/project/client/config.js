@@ -44,6 +44,7 @@
                 })
                 .when("/search-roommates",{
                     templateUrl :"views/search-roommates/search-roommates.view.html",
+                    controller:"SearchRoommateController"
                 })
                 .when("/search-apartments",{
                     templateUrl :"views/search-apartments/search-apartments.view.html",

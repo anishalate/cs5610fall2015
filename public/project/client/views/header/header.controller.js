@@ -5,7 +5,7 @@
         .module("RoomiesApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope,$location)
+    function HeaderController($scope,$location,$cookieStore)
     {
         $scope.$location = $location;
         $scope.headerType="";
@@ -14,7 +14,7 @@
             if ($scope.$location.url().indexOf('landlord-profile') != -1){
                 $scope.headerType="type3";
             }
-            else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1) {
+            else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1 ||$scope.$location.url().indexOf('profile-likes') != -1) {
                 $scope.headerType = "type2";
             }
 
@@ -26,7 +26,7 @@
             if ($scope.$location.url().indexOf('landlord-profile') != -1){
                 $scope.headerType="type3";
             }
-           else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1) {
+           else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1||$scope.$location.url().indexOf('profile-likes') != -1) {
                 $scope.headerType = "type2";
             }
 
@@ -34,5 +34,11 @@
                 $scope.headerType = "type1";
             }
         });
+        $scope.logout = function(){
+
+                $cookieStore.remove('user');
+            $location.path("#/home");
+
+        }
     }
 })();

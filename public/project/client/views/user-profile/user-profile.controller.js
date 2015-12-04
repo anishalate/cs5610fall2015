@@ -6,7 +6,7 @@
 
 
 
-    function UserProfileController($location,$scope,$rootScope,UserService) {
+    function UserProfileController($location,$scope,$rootScope,UserService,$cookieStore) {
 
         $scope.showDisplay = true;
         $scope.showEdit = false;
@@ -19,6 +19,7 @@
         $scope.showUpload=false;
         $scope.sizeLimit      = 5292880; //5MB in Bytes
         $scope.uploadProgress = 0;
+        $scope.editProfile=false;
         $scope.creds = {
             bucket: 'cs5610anish',
             access_key: 'AKIAJNX74V2SPUBGSRLQ',
@@ -28,6 +29,7 @@
         init();
 
         function init(){
+            $rootScope.currentUser=$cookieStore.get('user');
             if($rootScope.currentUser!==undefined){
                 $scope.user= $rootScope.currentUser;
                 AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
@@ -106,10 +108,11 @@
                         $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
                         $scope.$digest();
                         if($scope.user.userDetails.profilePicUrl != uniqueFileName) {
-                            $scope.user.userDetails.profilePicUrl != uniqueFileName;
+                            $scope.user.userDetails.profilePicUrl = uniqueFileName;
                             UserService.updateUser($scope.user._id, $scope.user)
                                 .then(function (user) {
-
+                                    //$cookieStore.remove('user');
+                                    $cookieStore.put('user',user);
                                 });
                         }
 
@@ -138,7 +141,8 @@
             console.log($scope.user);
             UserService.updateUser($scope.user._id,$scope.user)
                 .then(function(user){
-
+                //    $cookieStore.remove('user');
+                    $cookieStore.put('user',user);
 
                 })
         }
@@ -151,6 +155,22 @@
             $scope.editContactInfo =true;
             UserService.updateUser($scope.user._id,$scope.user)
                 .then(function(user){
+                    $cookieStore.remove('user');
+                    $cookieStore.put('user',user);
+
+                })
+
+
+        }
+        $scope.editProfileInfo=function(){
+            $scope.editProfile = true;
+        }
+        $scope.saveProfileInfo =function(){
+            UserService.updateUser($scope.user._id,$scope.user)
+                .then(function(user){
+                  //  $cookieStore.remove('user');
+                    $cookieStore.put('user',user);
+                    $scope.editProfile = false;
 
                 })
 

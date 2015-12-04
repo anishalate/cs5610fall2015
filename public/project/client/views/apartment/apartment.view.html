@@ -68,9 +68,14 @@
                     </div>
                     <div class="col-md-6 gallery">
                         <h3>Photos</h3>
-                        <li ng-repeat="image in listing.photosUrl">
+                       <!-- <li ng-repeat="image in listing.photosUrl">
                             <a>
                                 <img ng-src={{imgsrc}} imageonload={{generatePicUrl(image)}}>
+                            </a>
+                        </li>!-->
+                        <li ng-repeat="image in images">
+                            <a ng-click="openLightboxModal($index)">
+                                <img ng-src="{{image.url}}" class="img-thumbnail">
                             </a>
                         </li>
                         <div ng-show="isLandlord">

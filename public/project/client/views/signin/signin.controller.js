@@ -6,7 +6,7 @@
 
 
 
-    function SignInController($location,$scope,$rootScope,UserService,LandlordService) {
+    function SignInController($location,$scope,$rootScope,UserService,LandlordService,$cookieStore) {
 
         $scope.signin = function(){
 
@@ -29,6 +29,8 @@
                             return;
                         }
                         $rootScope.currentUser = user;
+                        $cookieStore.put('user',user);
+
 
                         $location.path("/profile");
                     });

@@ -101,7 +101,7 @@ module.exports = function(db,mongoose) {
                 deferred.reject(err);
             }
             else{
-                deferred.resolve(user);
+                deferred.resolve(updatedUser);
             }
         });
 

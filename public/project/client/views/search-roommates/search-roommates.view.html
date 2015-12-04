@@ -5,11 +5,11 @@
             <h3>Search Preference</h3>
 
             <div class="form-group">
-                <label class="col-md-3 control-label filters">Age</label>
-                <div class="col-sm-4 filters">
+                <label class="col-sm-5 control-label filters">Age</label>
+                <div class="col-sm-3 filters">
                     <input type="text" class="form-control" placeholder="Min">
                 </div>
-                <div class="col-sm-4 filters">
+                <div class="col-sm-3 filters">
                     <input type="text" class="form-control" placeholder="Max">
                 </div>
             </div>
@@ -24,17 +24,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-5 control-label filters">Distance</label>
-                <div class="col-sm-6 filters">
-                    <select class="form-control">
-                        <option value="5orless"><5 miles</option>
-                        <option value="10orless"><10 miles</option>
-                        <option value="20orless"><20 miles</option>
-                        <option value="any">Any</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label class="col-sm-5 control-label filters">Room Preference</label>
                 <div class="col-sm-6 filters">
@@ -68,79 +58,13 @@
                     </select>
                 </div>
             </div>
-                    <div class="row stylish-panel">
+                    <div class="row stylish-panel" ng-repeat="user in userList">
                         <div class="col-md-4">
                             <div>
-                                <img src="http://api.randomuser.me/portraits/men/33.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
+                                <img ng-src="{{generatePicUrl(user.profilePicUrl)}}">
                                 <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/10.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/11.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/17.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/15.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/13.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
-                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div>
-                                <img src="http://api.randomuser.me/portraits/men/23.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                                <h3>Roomie Match 90%</h3>
-                                <h3>Jon Smith</h3>
-                                <p> 29, Male | 5 miles |  Works at Abc Corp | Electrical Engineer </p>
+                                <h3>{{user.firstName}} {{user.lastName}}</h3>
+                                <p> {{user.age}}, {{user.sex}} |   Works at {{user.employment}} | {{user.education}} </p>
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
                                 <a href="#" class="btn btn-primary">See Profile </a>
                             </div>

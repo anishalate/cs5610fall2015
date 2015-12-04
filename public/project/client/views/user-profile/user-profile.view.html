@@ -16,12 +16,12 @@
                                 </button>
                             </div>
                             <div ng-show="showUpload">
-                                <input type="file" accept="image/*" id="imgFile" />
+                                <input class="form-control" type="file" accept="image/*" id="imgFile" />
                                 <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-upload" ng-click="uploadPic()"></button>
                             </div>
                         </div>
                         <!--/col-->
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6" ng-show="!editProfile">
                             <h2>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h2>
                             <p><strong>Age: </strong> {{user.userDetails.age}} years </p>
                             <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
@@ -32,6 +32,24 @@
                                 <span class="label label-info tags">Auburndale,MA</span>
                                 <span class="label label-info tags">within 20 miles</span>
                             </p>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="editProfileInfo()">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6" ng-show="editProfile">
+                            <input class="form-control" type="text" ng-model="user.userDetails.firstName"> <input class="form-control" type="text" ng-model="user.userDetails.lastName">
+                            <p><strong>Age: </strong> <input class="form-control" type="number" ng-model="user.userDetails.age"> years </p>
+                            <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
+                            <p><strong>Near: </strong>
+                                <span class="label label-info tags">{{user.userPref.zip}}</span>
+                                <span class="label label-info tags">Newton,MA</span>
+                                <span class="label label-info tags">Waltham,MA</span>
+                                <span class="label label-info tags">Auburndale,MA</span>
+                                <span class="label label-info tags">within 20 miles</span>
+                            </p>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="saveProfileInfo()">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
+                            </button>
                         </div>
                         <div class="col-xs-12 col-sm-3">
                             <button type="button" class="btn btn-default btn-lg">
@@ -69,9 +87,7 @@
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
             </button></th>
         <th>Roommate Preference
-            <button type="button" class="btn btn-default btn-sm" ng-click="edit()">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-            </button></th>
+            </th>
         </thead>
 
         <tbody>
@@ -144,67 +160,65 @@
                         <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
                     </button></th>
                 <th>Roommate Preference
-                    <button type="button" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
-                    </button></th>
+                   </th>
                 </thead>
 
                 <tbody>
                 <tr>
                     <td> Employment </td>
                     <td>
-                        <input type="text" ng-model="user.userDetails.employment" placeholder="Profession" >  </td>
+                        <input class="form-control" type="text" ng-model="user.userDetails.employment" placeholder="Profession" >  </td>
                     <td>
-                        <input type="text" ng-model="user.userRoommatePref.employment" placeholder="Profession" >  </td>
+                        <input class="form-control" type="text" ng-model="user.userRoommatePref.employment" placeholder="Profession" >  </td>
                     </td>
                 </tr>
                 <tr>
                     <td> Education </td>
-                    <td><input type="text" ng-model="user.userDetails.education" placeholder="Highest Degree of education">  </td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.education" placeholder="Highest Degree of education"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userDetails.education" placeholder="Highest Degree of education">  </td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.education" placeholder="Highest Degree of education"> </td>
                 </tr>
                 <tr>
                     <td> Smoke </td>
-                    <td><input type="text" ng-model="user.userLifestyle.smoke" placeholder="Yes/No/Sometimes">  </td>
-                    <td><input type="text" ng-model="user.userRoommatePref.smoke" placeholder="Yes/No/Sometimes">   </td>
+                    <td><input class="form-control" type="text" ng-model="user.userLifestyle.smoke" placeholder="Yes/No/Sometimes">  </td>
+                    <td><input class="form-control" type="text" ng-model="user.userRoommatePref.smoke" placeholder="Yes/No/Sometimes">   </td>
                 </tr>
                 <tr>
                     <td> Late Night Parties </td>
-                    <td><input type="text" ng-model="user.userLifestyle.parties" placeholder="Yes/No/Sometimes"> </td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.parties" placeholder="Yes/No/Sometimes"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userLifestyle.parties" placeholder="Yes/No/Sometimes"> </td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.parties" placeholder="Yes/No/Sometimes"> </td>
                 </tr>
                 <tr>
                     <td> Drug Usage </td>
-                    <td><input type="text" ng-model="user.userLifestyle.drugs" placeholder="Yes/No/Sometimes"></td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.drugs" placeholder="Yes/No/Sometimes"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userLifestyle.drugs" placeholder="Yes/No/Sometimes"></td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.drugs" placeholder="Yes/No/Sometimes"> </td>
                 </tr>
                 <tr>
                     <td> Food Preference </td>
-                    <td><input type="text" ng-model="food" placeholder="Input comma-separated" > </td>
-                    <td> <input type="text" ng-model="food1" placeholder="Input comma-separated" ></td>
+                    <td><input class="form-control" type="text" ng-model="food" placeholder="input comma-separated" > </td>
+                    <td> <input class="form-control" type="text" ng-model="food1" placeholder="input comma-separated" ></td>
                 </tr>
                 <tr>
                     <td> Alcohol </td>
-                    <td><input type="text" ng-model="user.userLifestyle.alcohol" placeholder="Yes/No/Sometimes"> </td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.alcohol" placeholder="Yes/No/Sometimes"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userLifestyle.alcohol" placeholder="Yes/No/Sometimes"> </td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.alcohol" placeholder="Yes/No/Sometimes"> </td>
                 </tr>
                 <tr>
                     <td> Languages</td>
                     <td>
-                        <input type="text" ng-model="languages" placeholder="Input comma-separated">
+                        <input class="form-control" type="text" ng-model="languages" placeholder="input comma-separated">
                     </td>
-                    <td> <input type="text" ng-model="languages1" placeholder="Input comma-separated"></td>
+                    <td> <input class="form-control" type="text" ng-model="languages1" placeholder="input comma-separated"></td>
                 </tr>
                 <tr>
                     <td> Hometown </td>
-                    <td><input type="text" ng-model="user.userDetails.hometown" placeholder="Hometown"> </td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.hometown" placeholder="Hometown"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userDetails.hometown" placeholder="Hometown"> </td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.hometown" placeholder="Hometown"> </td>
 
                 </tr>
                 <tr>
                     <td> Pets </td>
-                    <td><input type="text" ng-model="user.userLifestyle.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
-                    <td> <input type="text" ng-model="user.userRoommatePref.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
+                    <td><input class="form-control" type="text" ng-model="user.userLifestyle.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
+                    <td> <input class="form-control" type="text" ng-model="user.userRoommatePref.pets" placeholder="Dogs/Cats/No/Other Specify"> </td>
                 </tr>
 
                 </tbody>
@@ -235,14 +249,14 @@
                                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
                                 </button></h2>
                             <div>
-                                <p><input type="email" ng-model="user.userDetails.email" placeholder="email"> </p>
-                                <p><input type="tel" ng-model="user.userDetails.phone" placeholder="phone"></p>
+                                <p><input class="form-control" type="email" ng-model="user.userDetails.email" placeholder="email"> </p>
+                                <p><input class="form-control" type="tel" ng-model="user.userDetails.phone" placeholder="phone"></p>
                             </div>
 
                         </div>
                         <div class="col-xs-12 col-sm-3">
                            <p>Your contact information would be visible to those people whom you like and they like you back</p>
-                            <a>Click here to see your likes</a>
+                            <a href="#/profile-likes">Click here to see your likes</a>
                         </div>
                         <!--/col-->
 
