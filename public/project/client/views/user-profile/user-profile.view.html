@@ -42,20 +42,13 @@
                             <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
                             <p><strong>Near: </strong>
                                 <span class="label label-info tags">{{user.userPref.zip}}</span>
-                                <span class="label label-info tags">Newton,MA</span>
-                                <span class="label label-info tags">Waltham,MA</span>
-                                <span class="label label-info tags">Auburndale,MA</span>
-                                <span class="label label-info tags">within 20 miles</span>
+
                             </p>
                             <button type="button" class="btn btn-default btn-sm" ng-click="saveProfileInfo()">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
                             </button>
                         </div>
-                        <div class="col-xs-12 col-sm-3">
-                            <button type="button" class="btn btn-default btn-lg">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Like
-                            </button>
-                        </div>
+                       
                         <!--/col-->
 
 
@@ -129,9 +122,9 @@
         <tr>
             <td> Language</td>
             <td>
-                <div ng-repeat="language in user.userDetails.languages">
-                    <span class="label label-info tags">{{language}}</span>
-                </div>
+
+                    <span ng-repeat="language in user.userDetails.languages" class="label label-info tags">{{language}}</span>
+
             </td>
             <td><div ng-repeat="language in user.userRoommatePref.languages">
                 <span class="label label-info tags">{{language}}</span>

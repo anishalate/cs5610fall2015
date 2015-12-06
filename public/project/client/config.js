@@ -58,6 +58,10 @@
                     controller: "LandlordProfileController"
 
                 })
+                .when("/browse-profile/:browseUserId",{
+                    templateUrl:"views/browse-profile/browse-profile.view.html",
+                    controller:"BrowseProfileController"
+                })
 
                 .otherwise({
                     redirectTo:"/home"

@@ -58,15 +58,15 @@
                     </select>
                 </div>
             </div>
-                    <div class="row stylish-panel" ng-repeat="user in userList">
-                        <div class="col-md-4">
+                    <div class="row stylish-panel">
+                        <div class="col-md-4"  ng-repeat="user in userList">
                             <div>
-                                <img ng-src="{{generatePicUrl(user.profilePicUrl)}}">
+                                <img ng-src="{{generatePicUrl(user.userDetails.profilePicUrl)}}">
                                 <h3>Roomie Match 90%</h3>
-                                <h3>{{user.firstName}} {{user.lastName}}</h3>
-                                <p> {{user.age}}, {{user.sex}} |   Works at {{user.employment}} | {{user.education}} </p>
+                                <h3>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h3>
+                                <p> {{user.userDetails.age}}, {{user.userDetails.sex}} |   Works at {{user.userDetails.employment}} | {{user.userDetails.education}} </p>
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
-                                <a href="#" class="btn btn-primary">See Profile </a>
+                                <a href="#/browse-profile/{{user._id}}" class="btn btn-primary">See Profile </a>
                             </div>
                         </div>
                     </div>

@@ -11,9 +11,18 @@
             findUserByEmailAndPassword:findUserByEmailAndPassword,
             findAllUsers:findAllUsers,
             deleteUserById:deleteUserById,
-            updateUser:updateUser
+            updateUser:updateUser,
+            findUserById:findUserById,
         };
 
+        function findUserById(id){
+            var deferred = $q.defer();
+            $http.get("/api/project/user/"+id)
+                .success(function(user){
+                    deferred.resolve(user);
+                });
+            return deferred.promise;
+        }
         function findUserByEmailAndPassword(email,password){
 
             var deferred = $q.defer();

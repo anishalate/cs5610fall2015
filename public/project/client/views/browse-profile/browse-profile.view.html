@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-16 col-xs-12">
+            <div class="well panel panel-default">
+                <div class="panel-body profile-info">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 text-center">
+
+                            <img ng-src= "{{profilePicUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+
+
+                        </div>
+                        <!--/col-->
+                        <div class="col-xs-12 col-sm-6">
+                            <h2>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h2>
+                            <p><strong>Age: </strong> {{user.userDetails.age}} years </p>
+                            <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
+                            <p><strong>Near: </strong>
+                                <span class="label label-info tags">{{user.userPref.zip}}</span>
+
+                            </p>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Like
+                            </button>
+                        </div>
+                        <!--/col-->
+
+
+                        <!--/col-->
+
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/panel-body-->
+            </div>
+            <!--/panel-->
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#/profile">About</a></li>
+
+    </ul>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <th>Preferences</th>
+            <th>My Details
+                </th>
+            <th>Roommate Preference
+            </th>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td> Employment </td>
+                <td>{{user.userDetails.employment}}  </td>
+                <td> {{user.userRoommatePref.employment}} </td>
+            </tr>
+            <tr>
+                <td> Education </td>
+                <td>{{user.userDetails.education}}   </td>
+                <td>{{user.userRoommatePref.education}}</td>
+            </tr>
+            <tr>
+                <td> Smoke </td>
+                <td>{{user.userLifestyle.smoke}}  </td>
+                <td> {{user.userRoommatePref.smoke}} </td>
+            </tr>
+            <tr>
+                <td> Late Night Parties </td>
+                <td>{{user.userLifestyle.parties}} </td>
+                <td> {{user.userRoommatePref.parties}} </td>
+            </tr>
+            <tr>
+                <td> Drug Usage </td>
+                <td>{{user.userLifestyle.drugs}}</td>
+                <td> {{user.userRoommatePref.pets}} </td>
+            </tr>
+            <tr>
+                <td> Food Preference </td>
+                <td> {{user.userLifestyle.food}} </td>
+                <td> {{user.userRoommatePref.food}}</td>
+            </tr>
+            <tr>
+                <td> Alcohol </td>
+                <td>{{user.userLifestyle.alcohol}}  </td>
+                <td> {{user.userRoommatePref.alcohol}} </td>
+            </tr>
+            <tr>
+                <td> Language</td>
+                <td>
+                    <div ng-repeat="language in user.userDetails.languages">
+                        <span class="label label-info tags">{{language}}</span>
+                    </div>
+                </td>
+                <td>
+                    <span class="label label-info tags" ng-repeat="language in user.userRoommatePref.languages">{{language}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td> Hometown </td>
+                <td>{{user.userDetails.hometown}}  </td>
+                <td> {{user.userRoommatePref.hometown}} </td>
+
+            </tr>
+            <tr>
+                <td> Pets </td>
+                <td>{{user.userLifestyle.pets}}  </td>
+                <td> {{user.userRoommatePref.pets}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-16 col-xs-12">
+                <div class="well panel panel-default">
+                    <div class="panel-body">
+
+                        <!--/col-->
+                        <div class="col-xs-12 col-sm-6">
+                            <h2>Contact Details</h2>
+
+                            <div>
+                                <p><strong>Email: </strong> {{user.userDetails.email}} </p>
+                                <p><strong>Phone </strong>  {{user.userDetails.phone}} </p>
+                            </div>
+
+                        </div>
+
+
+                        <!--/col-->
+
+
+                        <!--/col-->
+
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/panel-body-->
+            </div>
+            <!--/panel-->
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>

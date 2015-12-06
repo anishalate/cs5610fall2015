@@ -33,7 +33,7 @@ module.exports = function(app,model){
 
     function findById(req,res){
         model
-            .findById(req.params.id)
+            .findUserById(req.params.id)
             .then(function(user){
                 res.json(user);
             });
