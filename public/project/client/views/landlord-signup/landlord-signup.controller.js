@@ -26,7 +26,7 @@
             var geocoder = new google.maps.Geocoder();
             var latitude=0;
             var longitude=0;
-            var address = $listing.address;
+            var address = $scope.listing.address;
             geocoder.geocode( { 'address': address}, function(results, status) {
 
                 if (status == google.maps.GeocoderStatus.OK) {
