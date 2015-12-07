@@ -36,7 +36,41 @@
         function initList(list){
             $scope.actualList = list;
             for(var i=0;i<list.length;i++){
+                if($scope.actualList[i]._id==$rootScope.currentUser._id){
+                    $scope.actualList.splice(i,1);
+                }
                 $scope.generatePicUrl($scope.actualList[i],$scope.actualList[i].userDetails.profilePicUrl);
+                var user = $rootScope.currentUser;
+                var total = 8;
+                var count =0;
+
+                if(list[i].userDetails.age>=user.userRoommatePref.minAge&&list[i].userDetails.age<=user.userRoommatePref.maxAge){
+                    count++;
+                }
+                if(list[i].userDetails.sex==user.userRoommatePref.sex || user.userRoommatePref.sex=="any"){
+                    count++;
+
+                }
+                if(list[i].userDetails.hometown.toLowerCase()==user.userRoommatePref.hometown.toLowerCase()
+                ||user.userRoommatePref.hometown=="any"||user.userRoommatePref.length<=1){
+                    count++;
+                }
+                if(list[i].userLifestyle.smoke.toLowerCase()==user.userRoommatePref.smoke.toLowerCase()){
+                    count++
+                }
+                if(list[i].userLifestyle.alcohol.toLowerCase()==user.userRoommatePref.alcohol.toLowerCase()){
+                    count++
+                }
+                if(list[i].userLifestyle.drugs.toLowerCase()==user.userRoommatePref.drugs.toLowerCase()){
+                    count++
+                }
+                if(list[i].userLifestyle.pets.toLowerCase()==user.userRoommatePref.pets.toLowerCase()){
+                    count++
+                }
+                if(list[i].userLifestyle.parties.toLowerCase()==user.userRoommatePref.parties.toLowerCase()){
+                    count++
+                }
+                $scope.actualList[i].roomMateMatch = count/total*100;
 
             }
         }

@@ -6,7 +6,7 @@
 
 
 
-    function BrowseProfileController($routeParams,$scope,UserService) {
+    function BrowseProfileController($routeParams,$scope,UserService,$cookieStore,$rootScope) {
 
 
 
@@ -16,7 +16,7 @@
         $scope.food1="";
         $scope.user={};
         $scope.browseUserId = $routeParams.browseUserId;
-
+        $scope.isLiked=false;
         $scope.creds = {
             bucket: 'cs5610anish',
             access_key: 'AKIAJNX74V2SPUBGSRLQ',
@@ -26,6 +26,7 @@
         init();
 
         function init(){
+            $rootScope.currentUser = $cookieStore.get('user');
             UserService.findUserById( $scope.browseUserId )
                 .then(function(user){
                     $scope.user= user;
@@ -34,6 +35,11 @@
                     if($scope.user.userDetails.profilePicUrl!==undefined){
                         generatePicUrl();
 
+                    }
+                    for(var users in $rootScope.currentUser.userDetails.likesUser){
+                        if($scope.user_id==users._id){
+                            $scope.isLiked=true;
+                        }
                     }
 
                 })
@@ -44,6 +50,15 @@
 
         }
 
+        $scope.likeUser =function(){
+            $scope.isLiked=true;
+            $rootScope.currentUser.userDetails.likesUser.push($scope.user._id);
+            UserService.updateUser($rootScope.currentUser._id,$rootScope.currentUser)
+                .then(function(status){
+                    $cookieStore.put('user',$rootScope.currentUser);
+                })
+
+        }
         function generatePicUrl(){
             var s3 = new AWS.S3();
             var params = {Bucket: $scope.creds.bucket, Key:$scope.user.userDetails.profilePicUrl , Expires: 60};

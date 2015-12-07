@@ -20,6 +20,7 @@
         $scope.sizeLimit      = 5292880; //5MB in Bytes
         $scope.uploadProgress = 0;
         $scope.editProfile=false;
+        $scope.likedByUsers=[];
         $scope.creds = {
             bucket: 'cs5610anish',
             access_key: 'AKIAJNX74V2SPUBGSRLQ',
@@ -32,6 +33,7 @@
             $rootScope.currentUser=$cookieStore.get('user');
             if($rootScope.currentUser!==undefined){
                 $scope.user= $rootScope.currentUser;
+                generateLikesInfo();
                 AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
                 AWS.config.region = 'us-east-1';
                 if($scope.user.userDetails.profilePicUrl!==undefined){
@@ -175,6 +177,26 @@
                 })
 
 
+        }
+
+        function generateLikesInfo(){
+            for(var userId in $scope.user.userDetails.likesUser){
+                UserService.findUserById(userId)
+                    .then(function(user){
+                        $scope.user.userDetails.likesUserName = user.userDetails.firstName+" "+user.userDetails.lastName;
+                    })
+
+            }
+
+           UserService.findAllUsers()
+               .then(function(users){
+                   for(var userId in users.userDetails.likesUser){
+                       if(userId==$scope.user._id){
+                           $scope.likedByUsers.push[users.userDetails.firstName+" "+users.userDetails.lastName];
+                       }
+                   }
+
+            });
         }
 
 

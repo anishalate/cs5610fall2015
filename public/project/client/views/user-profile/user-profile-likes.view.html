@@ -1,71 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="home/home.style.css">
-    <link rel="stylesheet" href="signin/signin.style.css">
-    <link rel="stylesheet" href="signup/signup.style.css">
-    <link rel="stylesheet" href="landlord-signup/landlord-signup.style.css">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" href="user-profile.style.css">
-</head>
-<body>
 
-<div class="navbar-wrapper">
-    <div class="container">
-
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#/home">Roomies</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../project/search-roommates/search-roommates.view.html">Search Roommates</a></li>
-                        <li><a href="#/signin">Search Apartments</a></li>
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/signup">Log Out </a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-    </div>
-</div>
-
-<div class="container">
+<div class="container" ng-controller="UserProfileController">
     <div class="row">
         <div class="col-md-16 col-xs-12">
             <div class="well panel panel-default">
                 <div class="panel-body profile-info">
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 text-center">
-                            <img src="http://api.randomuser.me/portraits/men/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
 
+                            <img ng-src= "{{profilePicUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+
+                            <div ng-show="!showUpload">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="editPic()">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Photo
+                                </button>
+                            </div>
+                            <div ng-show="showUpload">
+                                <input class="form-control" type="file" accept="image/*" id="imgFile" />
+                                <button type="button" class="btn btn-default btn-sm glyphicon glyphicon-upload" ng-click="uploadPic()"></button>
+                            </div>
                         </div>
                         <!--/col-->
-                        <div class="col-xs-12 col-sm-6">
-                            <h2>Jon Doe</h2>
-                            <p><strong>Age: </strong> 26 years </p>
-                            <p><strong>Looking for: </strong> Roommates and Apartments. </p>
+                        <div class="col-xs-12 col-sm-6" ng-show="!editProfile">
+                            <h2>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h2>
+                            <p><strong>Age: </strong> {{user.userDetails.age}} years </p>
+                            <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
                             <p><strong>Near: </strong>
-                                <span class="label label-info tags">Newton,MA</span>
-                                <span class="label label-info tags">Waltham,MA</span>
-                                <span class="label label-info tags">Auburndale,MA</span>
-                                <span class="label label-info tags">within 20 miles</span>
+                                <span class="label label-info tags">{{user.userPref.zip}}</span>
+
                             </p>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="editProfileInfo()">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6" ng-show="editProfile">
+                            <input class="form-control" type="text" ng-model="user.userDetails.firstName"> <input class="form-control" type="text" ng-model="user.userDetails.lastName">
+                            <p><strong>Age: </strong> <input class="form-control" type="number" ng-model="user.userDetails.age"> years </p>
+                            <p><strong>Looking for: </strong> {{user.userPref.lookingFor}} </p>
+                            <p><strong>Near: </strong>
+                                <span class="label label-info tags">{{user.userPref.zip}}</span>
+
+                            </p>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="saveProfileInfo()">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Save
+                            </button>
                         </div>
 
+                        <!--/col-->
+
+
+                        <!--/col-->
 
                     </div>
                     <!--/row-->
@@ -93,26 +76,9 @@
             </thead>
 
             <tbody>
-            <tr>
-                <td> Bon Jonson </td>
-                <td> Peter Parker    </td>
-
+            <tr ng-repeat="likes in user.userDetails.likesUserName">
+            {{likes}}
             </tr>
-            <tr>
-                <td> Harry Potter   </td>
-                <td> Peter Parker   </td>
-
-            </tr>
-            <tr>
-                <td> Ron Weasley </td>
-                <td> Bon Jonson </td>
-
-            </tr>
-            <tr>
-                <td> Jane Doe </td>
-
-            </tr>
-
             </tbody>
         </table>
     </div>
