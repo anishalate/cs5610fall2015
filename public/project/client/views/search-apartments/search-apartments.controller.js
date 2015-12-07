@@ -8,7 +8,9 @@
     function SearchApartmentController($scope,$location,$cookieStore,UserService,ListingService,$rootScope,$q)
     {
 
+
         $scope.apartmentList=[];
+        $scope.actualList=[];
         $scope.creds = {
             bucket: 'cs5610anish',
             access_key: 'AKIAJNX74V2SPUBGSRLQ',
@@ -24,11 +26,17 @@
                 ListingService.findAll()
                     .then(function (listings) {
                         $scope.apartmentList = listings;
+                        initList(listings);
+
                     });
             }
             else{
                 $location.path("#/signin")
             }
+        }
+
+        function initList(list){
+            $scope.actualList = list;
         }
         $scope.generatePicUrl =function(imageKey){
             var s3 = new AWS.S3();
@@ -48,6 +56,26 @@
             $rootScope.currentListing = apartment;
             $cookieStore.put('listing',apartment);
             $location.path("/browse-apartment");
+        }
+
+        $scope.filterList = function(){
+            var tempList=[];
+            if($scope.beds===""||$scope.baths===""||$scope.rentMin==undefined||$scope.rentMax==undefined){
+                alert("Please enter all the search fields");
+                return;
+            }
+
+            for(var i=0;i<$scope.apartmentList.length;i++){
+
+                if($scope.apartmentList[i].beds==$scope.beds&& $scope.apartmentList[i].baths==$scope.baths&&
+                    $scope.apartmentList[i].rent>=$scope.rentMin&&$scope.apartmentList[i].rent<=$scope.rentMax
+                ){
+                    tempList.push($scope.apartmentList[i]);
+                }
+            }
+            initList(tempList);
+
+
         }
 
 

@@ -17,7 +17,8 @@ module.exports = function(db,mongoose) {
         updateListing: updateListing,
         findListingByLandlord: findListingByLandlord,
         findAllListings:findAllListings,
-        findListingWithoutLandlordId:findListingWithoutLandlordId
+        findListingWithoutLandlordId:findListingWithoutLandlordId,
+
 
     };
 
@@ -91,6 +92,7 @@ module.exports = function(db,mongoose) {
 
         return deferred.promise;
     }
+
 
     function findListingById(landlordId,listingId){
         var deferred = q.defer();

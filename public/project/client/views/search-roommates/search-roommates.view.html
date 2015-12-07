@@ -7,17 +7,17 @@
             <div class="form-group">
                 <label class="col-sm-5 control-label filters">Age</label>
                 <div class="col-sm-3 filters">
-                    <input type="text" class="form-control" placeholder="Min">
+                    <input type="text" class="form-control" placeholder="Min" ng-model="ageMin">
                 </div>
                 <div class="col-sm-3 filters">
-                    <input type="text" class="form-control" placeholder="Max">
+                    <input type="text" class="form-control" placeholder="Max" ng-model="ageMax">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-5 control-label filters">Sex</label>
                 <div class="col-sm-6 filters">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="sex">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="any">Any</option>
@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="col-sm-5 control-label filters">Room Preference</label>
                 <div class="col-sm-6 filters">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="roomType">
                         <option value="independent">Independent</option>
                         <option value="shared">Shared</option>
                         <option value="any">Any</option>
@@ -49,23 +49,24 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-22 col-md-offset-3">
             <div class="form-group sortby">
                 <label class="col-sm-3 control-label">Sort By</label>
-                <div class="col-sm-6">
+              <!--  <div class="col-sm-6">
 
                     <select class="form-control">
                         <option value="match">Roomie Match</option>
                         <option value="distance">Distance</option>
                         <option value="any">Any</option>
                     </select>
-                </div>
+                </div>!-->
             </div>
                     <div class="row stylish-panel">
-                        <div class="col-md-4"  ng-repeat="user in userList">
+                        <div class="col-md-4"  ng-repeat="user in actualList">
                             <div>
-                                <img ng-src="{{generatePicUrl(user.userDetails.profilePicUrl)}}">
-                                <h3>Roomie Match 90%</h3>
+                                <img ng-src="{{user.userDetails.profilePicUrl}}" class="img-square img-thumbnail thumbs">
+                                <!--<h3>Roomie Match 90%</h3>!-->
                                 <h3>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h3>
                                 <p> {{user.userDetails.age}}, {{user.userDetails.sex}} |   Works at {{user.userDetails.employment}} | {{user.userDetails.education}} </p>
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Like
+
                                 <a href="#/browse-profile/{{user._id}}" class="btn btn-primary">See Profile </a>
                             </div>
                         </div>

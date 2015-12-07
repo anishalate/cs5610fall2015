@@ -13,7 +13,9 @@
             deleteListing:deleteListing,
             updateListing:updateListing,
             findAll:findAll
+
         };
+
         function findAll(){
             var deferred=$q.defer();
             $http.get("/api/project/listing/")
