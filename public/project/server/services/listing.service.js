@@ -5,7 +5,25 @@ module.exports = function(app,model) {
     app.delete("/api/project/landlord/:landlordId/listing/:listingId", deleteListing);
     app.put("/api/project/landlord/:landlordId/listing/:listingId", updateListing);
     app.post("/api/project/landlord/:landlordId/listing", findListingsByLandlord);
+    app.get("/api/project/listing",findAllListings);
+    app.get("/api/project/listing/:listingId",findListingWithoutLandlordId);
 
+
+
+    function findListingWithoutLandlordId(req,res){
+        model
+            . findListingWithoutLandlordId(req.params.listingId)
+            .then(function(listing){
+                res.json(listing);
+            });
+    }
+    function findAllListings(req,res){
+        model
+            .findAllListings()
+            .then(function(listings){
+                res.json(listings);
+            });
+    }
 
     function findListingsByLandlord(req, res) {
             model

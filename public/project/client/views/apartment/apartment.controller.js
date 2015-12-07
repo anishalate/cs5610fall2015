@@ -2,23 +2,12 @@
 (function() {
     angular
         .module("RoomiesApp")
-        .directive('imageonload', function() {
-            return {
-                restrict: 'A',
-                link: function($scope, element, attrs) {
-                    element.bind('load', function() {
-                        //call the function that was passed
-                        $scope.$apply(attrs.imageonload);
-                    });
-                }
-            };
-        })
         .controller("ApartmentController", ApartmentController);
 
 
 
 
-    function ApartmentController($scope,$rootScope,LandlordService,ListingService,$location,$q) {
+    function ApartmentController($scope,$rootScope,LandlordService,ListingService,$location,$q,$cookieStore) {
         $scope.listing={};
         $scope.landlord={};
         $scope.editListingInfo= true;
@@ -36,15 +25,25 @@
         $scope.imgsrc="";
         $scope.images=[];
         init();
+        function initializeAutoComplete() {
+
+            var input = document.getElementById('address');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+        }
 
         function init(){
 
-            if($rootScope.currentUser===undefined&&$rootScope.currentLandlord===undefined){
+
+
+            $rootScope.currentLandlord=$cookieStore.get('landlord');
+            if($rootScope.currentLandlord===undefined){
                 $location.path("/signin");
                 return;
             }
             AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
             AWS.config.region = 'us-east-1';
+            $rootScope.currentListing=$cookieStore.get('listing');
             $scope.listing = $rootScope.currentListing;
             var userId = $rootScope.currentListing.userId;
             for(var i=0;i<$scope.listing.photosUrl.length;i++){
@@ -54,6 +53,7 @@
                     })
 
             }
+            $rootScope.currentLandlord=$cookieStore.get('landlord');
             if($rootScope.currentLandlord!==undefined){
                 $scope.isLandlord=true;
             }
@@ -75,6 +75,9 @@
         $scope.saveAddress = function(){
             ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                 .then(function(listing){
+                    $cookieStore.put('listing',$scope.listing);
+
+                    init();
                     $scope.editAdd=false;
                     initMap();
                 });
@@ -86,6 +89,7 @@
             }
             ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                 .then(function(listing){
+                    $cookieStore.put('listing',$scope.listing);
                     $scope.editListingInfo=true;
                     initMap();
             });
@@ -140,6 +144,7 @@
                         $scope.listing.photosUrl.push(uniqueFileName);
                         ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                             .then(function(listing){
+                                $cookieStore.put('listing',$scope.listing);
 
                             });
 
@@ -160,9 +165,7 @@
 
 
         }
-        $scope.openLightboxModal = function (index) {
-            Lightbox.openModal($scope.images, index);
-        }
+
         $scope.generatePicUrl =function(imageKey){
             var s3 = new AWS.S3();
             var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};
@@ -207,15 +210,23 @@
                 if (status == google.maps.GeocoderStatus.OK) {
                     latitude = results[0].geometry.location.lat();
                     longitude = results[0].geometry.location.lng();
+                    var latlng = {lat: latitude, lng: longitude}
                     var map = new google.maps.Map(document.getElementById('map1'), {
-                        center: {lat: latitude, lng: longitude},
-                        zoom:15
+                        center:latlng ,
+                        zoom:15,
+
+                    });
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+
                     });
                 }
             });
 
         }
         google.maps.event.addDomListener(window, 'load', initMap);
+        google.maps.event.addDomListener(window, 'load', initializeAutoComplete);
     }
 
 

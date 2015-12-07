@@ -1,0 +1,58 @@
+<div class="search-div">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="aptdetails col-md-12">
+                    <div class="col-md-4">
+                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
+                    </div>
+                    <div class="col-md-8">
+                        <p>Beds:{{listing.beds}} Baths:{{listing.baths}} Rent:${{listing.rent}}</p>
+                        <p>Available from {{listing.startDate}}</p>
+                        <p> {{listing.amenities}} </p>
+                        <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
+                        <p>Email: {{landlord.email}}</p>
+                        <p>Phone: {{landlord.phone}}</p>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h3>Address:{{listing.address}}</h3>
+
+                    </div>
+
+                    <div id="map1" class="map1">
+
+                    </div>
+
+                </div>
+                <div class="col-md-6 gallery">
+                    <h3>Photos</h3>
+                    <!-- <li ng-repeat="image in listing.photosUrl">
+                         <a>
+                             <img ng-src={{imgsrc}} imageonload={{generatePicUrl(image)}}>
+                         </a>
+                     </li>!-->
+                    <li ng-repeat="image in images">
+                        <a ng-click="openLightboxModal($index)">
+                            <img ng-src="{{image.url}}" class="img-thumbnail">
+                        </a>
+                    </li>
+
+                </div>
+            </div>
+            <br>
+            <br>
+            <hr>
+
+        </div>
+    </div>
+
+</div>

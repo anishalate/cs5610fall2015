@@ -5,32 +5,36 @@
             <h3>Search Preference</h3>
 
             <div class="form-group">
-                <label class="col-md-3 control-label filters">Rent</label>
-                <div class="col-sm-4 filters">
+                <label class="col-sm-5 control-label filters">Rent Min</label>
+                <div class="col-sm-6 filters">
                     <input type="text" class="form-control" placeholder="Min">
                 </div>
-                <div class="col-sm-4 filters">
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label filters">Rent max</label>
+                <div class="col-sm-6 filters">
                     <input type="text" class="form-control" placeholder="Max">
                 </div>
+
             </div>
 
             <div class="form-group">
-                <label class="col-sm-5 control-label filters">Zip</label>
+                <label class="col-sm-5 control-label filters">Beds</label>
                 <div class="col-sm-6 filters">
-                    <input type="text" class="form-control" placeholder="01234">
+                    <input type="text" class="form-control" placeholder="Beds">
                 </div>
+
             </div>
             <div class="form-group">
-                <label class="col-sm-5 control-label filters">Distance</label>
+                <label class="col-sm-5 control-label filters">Baths</label>
                 <div class="col-sm-6 filters">
-                    <select class="form-control">
-                        <option value="5orless"><5 miles</option>
-                        <option value="10orless"><10 miles</option>
-                        <option value="20orless"><20 miles</option>
-                        <option value="any">Any</option>
-                    </select>
+                    <input type="text" class="form-control" placeholder="Baths">
                 </div>
+
             </div>
+
+
             <div class="form-group">
                 <label class="col-sm-5 control-label filters">Available from</label>
                 <div class="col-sm-6 filters">
@@ -47,8 +51,8 @@
         </div>
 
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-22 col-md-offset-3">
-            <div class="form-group sortby">
+        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+            <!--<div class="form-group sortby">
                 <label class="col-sm-3 control-label">Sort By</label>
                 <div class="col-sm-6">
 
@@ -59,78 +63,25 @@
                         <option value="any">Any</option>
                     </select>
                 </div>
-            </div>
+            </div>!-->
 
             <div class="row stylish-panel">
-                <div class="col-md-22">
-                    <div class="col-md-4">
+                <div class="col-md-12" ng-repeat="apartment in apartmentList">
+                    <div class="col-md-3">
                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
                     </div>
                     <div class="col-md-14">
-                        <p>Beds:2 Baths:2 Rent:$2400</p>
-                        <p>Location:Waltham,MA</p>
-                        <p>Distance 1 mile | Available from 08/01/2015</p>
-                        <p> Washer | Dryer |  AC </p>
+                        <p>Beds:{{apartment.beds}} Baths:{{apartment.beds}} Rent:${{apartment.rent}}</p>
+                        <p>Location:{{apartment.address}}</p>
+                        <p>Available from {{apartment.startDate}}</p>
+
+                        <p ng-if="apartment.amenities.length>0"> {{apartment.amenities}} </p>
                         
-                        <a href="#/apartments" class="btn btn-primary">View Apartment </a>
+                        <a class="btn btn-primary" ng-click="browseApartment(apartment)">View Apartment </a>
                     </div>
                 </div>
 
-                <div class="col-md-22">
-                    <div class="col-md-4">
-                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                    </div>
-                    <div class="col-md-14">
-                        <p>Beds:2 Baths:2 Rent:$2400</p>
-                        <p>Location:Waltham,MA</p>
-                        <p>Distance 1 mile | Available from 08/01/2015</p>
-                        <p> Washer | Dryer |  AC </p>
-                        
-                        <a href="#/apartments" class="btn btn-primary">View Apartment </a>
-                    </div>
-                </div>
 
-                <div class="col-md-22">
-                    <div class="col-md-4">
-                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                    </div>
-                    <div class="col-md-14">
-                        <p>Beds:2 Baths:2 Rent:$2400</p>
-                        <p>Location:Waltham,MA</p>
-                        <p>Distance 1 mile | Available from 08/01/2015</p>
-                        <p> Washer | Dryer |  AC </p>
-                        
-                        <a href="#/apartments" class="btn btn-primary">View Apartment </a>
-                    </div>
-                </div>
-
-                <div class="col-md-22">
-                    <div class="col-md-4">
-                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                    </div>
-                    <div class="col-md-14">
-                        <p>Beds:2 Baths:2 Rent:$2400</p>
-                        <p>Location:Waltham,MA</p>
-                        <p>Distance 1 mile | Available from 08/01/2015</p>
-                        <p> Washer | Dryer |  AC </p>
-                        
-                        <a href="#/apartments" class="btn btn-primary">View Apartment </a>
-                    </div>
-                </div>
-
-                <div class="col-md-22">
-                    <div class="col-md-4">
-                        <img src="http://www.execustay.com/about-execustay/furnished-apartments.jpg" alt="Texto Alternativo" class="img-square img-thumbnail thumbs">
-                    </div>
-                    <div class="col-md-14">
-                        <p>Beds:2 Baths:2 Rent:$2400</p>
-                        <p>Location:Waltham,MA</p>
-                        <p>Distance 1 mile | Available from 08/01/2015</p>
-                        <p> Washer | Dryer |  AC </p>
-                        
-                        <a href="#/apartments" class="btn btn-primary">View Apartment </a>
-                    </div>
-                </div>
 
             </div>
 

@@ -11,8 +11,17 @@
             findListingsByLandlord:findListingsByLandlord,
             findListingById:findListingById,
             deleteListing:deleteListing,
-            updateListing:updateListing
+            updateListing:updateListing,
+            findAll:findAll
         };
+        function findAll(){
+            var deferred=$q.defer();
+            $http.get("/api/project/listing/")
+                .success(function(listings){
+                    deferred.resolve(listings);
+                })
+            return deferred.promise;
+        }
 
         function findListingsByLandlord(landlordId){
 
@@ -37,6 +46,7 @@
         function createListing(landlordId,newListing){
 
             var deferred = $q.defer();
+            newListing.userId = landlordId;
             $http.post("/api/project/landlord/"+landlordId+"/listing",newListing)
                 .success(function(listing){
 

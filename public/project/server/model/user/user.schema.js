@@ -13,7 +13,8 @@ module.exports = function(mongoose){
             employment: String,
             languages: [String],
             hometown: String,
-            profilePicUrl: String
+            profilePicUrl: String,
+            likesUser:[mongoose.Schema.Types.ObjectId]
         },
 
         userPref: {

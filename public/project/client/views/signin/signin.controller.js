@@ -45,6 +45,7 @@
                                 return;
                             }
                             $rootScope.currentLandlord =landlord;
+                            $cookieStore.put('landlord',landlord);
                             $location.path("/landlord-profile");
                         })
                 }

@@ -45,14 +45,15 @@
                     <hr>
 
                 </div>
-                <div class="col-md-6 content">
-                   <img ng-repeat="photo in listing.photosUrl" ng-src="{{photo.img}}">
-                </div>
+
             <br>
             <br>
             <hr>
                 <button type="button" class="btn btn-default btn-sm" ng-click="editListing(listing)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Listing
+                </button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="deleteListing(listing.userId,listing._id)">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Delete Listing
                 </button>
         </div>
 
@@ -81,7 +82,14 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td> <input type="text" class="form-control "  placeholder="Zip code" ng-model="newListing.zip"></td>
+                                <td> <input type="text" class="form-control" id="address"  placeholder="Address" ng-model="newListing.address"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <tbody>
+                            <tr>
                                 <td><input type="number" class="form-control "  placeholder="Beds" ng-model="newListing.beds"></td>
                                 <td> <input type="number" class="form-control"  placeholder="Bath" ng-model="newListing.baths"></td>
                             </tr>

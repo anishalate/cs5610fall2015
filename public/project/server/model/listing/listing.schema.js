@@ -11,8 +11,7 @@ module.exports = function(mongoose){
         startDate: Date,
         leaseDuration: String,
         amenities:[String],
-        photosUrl:[String]
-
+        photosUrl:[String],
 
     },{collection: "cs5610.project.listing"});
     return listingSchema;

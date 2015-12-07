@@ -16,6 +16,8 @@ module.exports = function(db,mongoose) {
         deleteListing: deleteListing,
         updateListing: updateListing,
         findListingByLandlord: findListingByLandlord,
+        findAllListings:findAllListings,
+        findListingWithoutLandlordId:findListingWithoutLandlordId
 
     };
 
@@ -36,11 +38,65 @@ module.exports = function(db,mongoose) {
 
     }
 
+    function findListingWithoutLandlordId(listingId){
+        var deferred = q.defer();
+        console.log(listingId);
+        console.log(listingId.toString());
+        LandlordModel.aggregate({$match:{'listings._id':listingId}},{$unwind:'$listings'},{$project:{
+                userId:'$listings.userId',
+                zip: '$listings.zip',
+                address: '$listings.address',
+                beds:'$listings.beds',
+                baths: '$listings.baths',
+                rent: '$listings.rent',
+                startDate: '$listings.startDate',
+                leaseDuration: '$listings.leaseDuration',
+                amenities:'$listings.amenities',
+                latitude:'$listings.latitude',
+                longitude:'$listings.longitude',
+                photosUrl:'$listings.photosUrl'}},function(err,listing){
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(listing);
+            }
+        })
+
+        return deferred.promise;
+    }
+
+    function findAllListings(){
+        var deferred = q.defer();
+        LandlordModel.aggregate({$unwind:'$listings'},{$project:{
+            userId:'$listings.userId',
+            zip: '$listings.zip',
+            address: '$listings.address',
+            beds:'$listings.beds',
+            baths: '$listings.baths',
+            rent: '$listings.rent',
+            startDate: '$listings.startDate',
+            leaseDuration: '$listings.leaseDuration',
+            amenities:'$listings.amenities',
+            latitude:'$listings.latitude',
+            longitude:'$listings.longitude',
+            photosUrl:'$listings.photosUrl'}},function(err,listings){
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(listings);
+            }
+        })
+
+        return deferred.promise;
+    }
+
     function findListingById(landlordId,listingId){
         var deferred = q.defer();
 
         LandlordModel.findById(landlordId, function(err,landlord){
-            var listings = landlord.fields;
+            var listings = landlord.listings;
             var listing ={};
             for(var i=0;i<listings.length;i++){
                 if(listings[i]._id==listingId)

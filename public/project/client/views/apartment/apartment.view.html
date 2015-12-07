@@ -10,7 +10,6 @@
                         </div>
                         <div class="col-md-8" ng-show="editListingInfo">
                             <p>Beds:{{listing.beds}} Baths:{{listing.baths}} Rent:${{listing.rent}}</p>
-                            <p>Location:{{listing.zip}}</p>
                             <p>Available from {{listing.startDate}}</p>
                             <p> {{listing.amenities}} </p>
                             <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
@@ -26,7 +25,6 @@
                             <p>Beds:<input type="number" ng-model="listing.beds">
                                 Baths:<input type="number" ng-model="listing.baths">
                                 Rent:$<input type="number" ng-model="listing.rent"> </p>
-                            <p>Location:<input type="number" ng-model="listing.zip"> </p>
                             <p>Available from <input placeholder="Available from" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  id="date" ng-model="listing.startDate"></p>
                             <p>Amenities <input type="text" placeholder="Input comma separated" ng-model="amenities"> </p>
                             <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
@@ -48,14 +46,16 @@
                         <div ng-show="!editAdd">
                             <h3>Address:{{listing.address}}</h3>
                             <div ng-show="isLandlord">
+
                                 <button type="button" class="btn btn-default btn-sm" ng-click="editAddress()">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                                 </button>
                             </div>
                         </div>
                         <div ng-show="editAdd">
-                            <h3>Address:<input type="text" placeholder="address" ng-model="listing.address"> </h3>
+                            <h3>Address:<input type="text" placeholder="address" id="address" size="30" ng-model="listing.address"> </h3>
                             <div ng-show="isLandlord">
+                                <p>Add a space after selecting the address and then hit save</p>
                                 <button type="button" class="btn btn-default btn-sm" ng-click="saveAddress()">
                                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save
                                 </button>
@@ -74,7 +74,7 @@
                             </a>
                         </li>!-->
                         <li ng-repeat="image in images">
-                            <a ng-click="openLightboxModal($index)">
+                            <a>
                                 <img ng-src="{{image.url}}" class="img-thumbnail">
                             </a>
                         </li>

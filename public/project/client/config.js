@@ -48,8 +48,13 @@
                 })
                 .when("/search-apartments",{
                     templateUrl :"views/search-apartments/search-apartments.view.html",
+                    controller:"SearchApartmentController"
                 })
                 .when("/apartments",{
+                    templateUrl :"views/apartment/apartment.view.html",
+                    controller: "ApartmentController"
+                })
+                .when("/apartments/:apartmentId",{
                     templateUrl :"views/apartment/apartment.view.html",
                     controller: "ApartmentController"
                 })
@@ -61,6 +66,10 @@
                 .when("/browse-profile/:browseUserId",{
                     templateUrl:"views/browse-profile/browse-profile.view.html",
                     controller:"BrowseProfileController"
+                })
+                .when("/browse-apartment",{
+                    templateUrl:"views/browse-apartment/browse-apartment.view.html",
+                    controller:"BrowseApartmentController"
                 })
 
                 .otherwise({

@@ -11,10 +11,10 @@
         $scope.headerType="";
 
         $scope.init =function() {
-            if ($scope.$location.url().indexOf('landlord-profile') != -1){
+            if ($scope.$location.url().indexOf('landlord-profile') != -1||$scope.$location.url().indexOf('apartment') != -1){
                 $scope.headerType="type3";
             }
-            else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1 ||$scope.$location.url().indexOf('profile-likes') != -1) {
+            else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('profile-likes') != -1||$scope.$location.url().indexOf('browse-apartment') != -1||$scope.$location.url().indexOf('browse-profile') != -1) {
                 $scope.headerType = "type2";
             }
 
@@ -26,7 +26,7 @@
             if ($scope.$location.url().indexOf('landlord-profile') != -1){
                 $scope.headerType="type3";
             }
-           else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('apartment') != -1||$scope.$location.url().indexOf('profile-likes') != -1) {
+           else if ($scope.$location.url().indexOf('profile') != -1 || $scope.$location.url().indexOf('search') != -1||$scope.$location.url().indexOf('profile-likes') != -1||$scope.$location.url().indexOf('browse-apartment') != -1||$scope.$location.url().indexOf('browse-profile') != -1) {
                 $scope.headerType = "type2";
             }
 
@@ -37,6 +37,8 @@
         $scope.logout = function(){
 
                 $cookieStore.remove('user');
+                $cookieStore.remove('landlord');
+                $cookieStore.remove('listing');
             $location.path("#/home");
 
         }
