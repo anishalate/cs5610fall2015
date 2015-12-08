@@ -96,12 +96,12 @@ module.exports = function(db,mongoose) {
 
     function updateUser(id,updatedUser){
         var deferred = q.defer();
-        UserModel.findByIdAndUpdate(id,updatedUser,{new:false},function(err,user){
+        UserModel.findByIdAndUpdate(id,updatedUser,{new:true},function(err,user){
             if(err){
                 deferred.reject(err);
             }
             else{
-                deferred.resolve(updatedUser);
+                deferred.resolve(user);
             }
         });
 

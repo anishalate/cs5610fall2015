@@ -190,9 +190,11 @@
 
            UserService.findAllUsers()
                .then(function(users){
-                   for(var userId in users.userDetails.likesUser){
-                       if(userId==$scope.user._id){
-                           $scope.likedByUsers.push[users.userDetails.firstName+" "+users.userDetails.lastName];
+                   for(var user in users) {
+                       for (var userId in user.userDetails.likesUser) {
+                           if (userId == $scope.user._id) {
+                               $scope.likedByUsers.push[users.userDetails.firstName + " " + users.userDetails.lastName];
+                           }
                        }
                    }
 
