@@ -1,3 +1,7 @@
+<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+
 <div class="search-div">
     <div class="row">
         <div class="container">
@@ -33,18 +37,12 @@
                     </div>
 
                 </div>
-                <div class="col-md-6 gallery">
+                <div class="col-md-6 map1">
                     <h3>Photos</h3>
-                    <!-- <li ng-repeat="image in listing.photosUrl">
-                         <a>
-                             <img ng-src={{imgsrc}} imageonload={{generatePicUrl(image)}}>
-                         </a>
-                     </li>!-->
-                    <li ng-repeat="image in images">
-                        <a ng-click="openLightboxModal($index)">
-                            <img ng-src="{{image.url}}" class="img-thumbnail">
-                        </a>
-                    </li>
+
+                    <div class="fotorama gallery">
+                        <img ng-repeat="image in images" ng-src="{{image.url}}" class="img-thumbnail">
+                    </div>
 
                 </div>
             </div>

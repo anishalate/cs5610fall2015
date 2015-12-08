@@ -7,7 +7,7 @@
 
 
 
-    function BrowseApartmentController($scope,$rootScope,$location,$cookieStore,LandlordService) {
+    function BrowseApartmentController($scope,$rootScope,$location,$cookieStore,LandlordService,$q) {
         $scope.listing={};
         $scope.landlord={};
         $scope.amenities="";
