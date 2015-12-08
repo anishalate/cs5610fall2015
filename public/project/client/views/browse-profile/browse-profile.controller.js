@@ -76,17 +76,21 @@
         function showContactInfo(){
             var check1=false;
             var check2=false;
-            for(var users in $rootScope.currentUser.userDetails.likesUser) {
-                if ($scope.user._id == users._id) {
-                    check1 = true;
+            if($rootScope.currentUser.userDetails.likesUser!==undefined) {
+                for (var users in $rootScope.currentUser.userDetails.likesUser) {
+                    if ($scope.user._id == users._id) {
+                        check1 = true;
+                    }
                 }
             }
-                for(var users1 in $scope.user.userDetails.likesUser){
-                    if(users1._id==$rootScope.currentUser._id){
-                        check2=true;
+            if($scope.user.userDetails.likesUser!==undefined) {
+                for (var users1 in $scope.user.userDetails.likesUser) {
+                    if (users1._id == $rootScope.currentUser._id) {
+                        check2 = true;
                     }
 
                 }
+            }
             if(check1&&check2){
                 $scope.showDetails=true;
             }
