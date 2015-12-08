@@ -37,6 +37,7 @@
                         generatePicUrl();
 
                     }
+                    showContactInfo();
                     for(var users in $rootScope.currentUser.userDetails.likesUser){
                         if($scope.user._id==users._id){
                             $scope.isLiked=true;
@@ -44,7 +45,7 @@
                     }
 
                 });
-            showContactInfo();
+
 
 
 
