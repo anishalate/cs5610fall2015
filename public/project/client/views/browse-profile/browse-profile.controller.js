@@ -23,6 +23,7 @@
             secret_key: 'ou5ZuoUfmXjTF5ORuLwZMz4BnUp3w2A+g02eaTva'
         };
         $scope.profilePicUrl = "http://www.gravatar.com/avatar/";
+        $scope.showDetails = false;
         init();
 
         function init(){
@@ -37,12 +38,13 @@
 
                     }
                     for(var users in $rootScope.currentUser.userDetails.likesUser){
-                        if($scope.user_id==users._id){
+                        if($scope.user._id==users._id){
                             $scope.isLiked=true;
                         }
                     }
 
-                })
+                });
+            showContactInfo();
 
 
 
@@ -70,6 +72,30 @@
             });
 
         }
+
+        function showContactInfo(){
+            var check1=false;
+            var check2=false;
+            for(var users in $rootScope.currentUser.userDetails.likesUser) {
+                if ($scope.user._id == users._id) {
+                    check1 = true;
+                }
+            }
+                for(var users1 in $scope.user.userDetails.likesUser){
+                    if(users1._id==$rootScope.currentUser._id){
+                        check2=true;
+                    }
+
+                }
+            if(check1&&check2){
+                $scope.showDetails=true;
+            }
+
+
+                }
+
+
+
 
 
 

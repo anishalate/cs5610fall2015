@@ -58,7 +58,7 @@
 
         }
 
-       
+
 
 
         $scope.openLightboxModal = function (index) {
