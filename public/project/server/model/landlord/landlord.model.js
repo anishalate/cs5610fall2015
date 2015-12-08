@@ -235,12 +235,14 @@ module.exports = function(db,mongoose) {
 
     function updateLandlord(id,updatedUser){
         var deferred = q.defer();
+        delete updatedUser["_id"];
         LandlordModel.update({_id:id},{$set:updatedUser},function(err,user){
             if(err){
                 deferred.reject(err);
             }
             else{
-                deferred.resolve(user);
+                updatedUser._id=id;
+                deferred.resolve(updatedUser);
             }
         });
 
