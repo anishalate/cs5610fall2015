@@ -85,13 +85,14 @@
 
         $scope.saveListing = function(){
             if( $scope.amenities.length>1) {
-                $scope.listing.amenities = $scope.amenities.split(",");
+                $scope.listing.amenities = $scope.amenities;
             }
             ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                 .then(function(listing){
                     $cookieStore.put('listing',$scope.listing);
                     $scope.editListingInfo=true;
                     initMap();
+                    init();
             });
 
         }
@@ -145,6 +146,7 @@
                         ListingService.updateListing($scope.landlord._id,$rootScope.currentListing._id,$scope.listing)
                             .then(function(listing){
                                 $cookieStore.put('listing',$scope.listing);
+                                init();
 
                             });
 

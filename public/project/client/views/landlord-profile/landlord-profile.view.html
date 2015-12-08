@@ -37,24 +37,28 @@
                 <div class="col-md-6">
                     <p>Beds:{{listing.beds}} Baths:{{listing.baths}} Rent:${{listing.rent}}</p>
                     <p>Available from {{listing.startDate}}</p>
-                    <p>{{listing.amenities}}</p>
+                    <p><span ng-repeat="amenities in listing.amenities" class="label label-info tags">{{amenities}}</span></p>
                     <p>Address: {{listing.address}}</p>
-                    <br>
-                    <br>
-                    <hr>
 
+                    <br>
+                    <br>
                 </div>
 
-            <br>
-            <br>
-            <hr>
+                <div class="col-md-6">
                 <button type="button" class="btn btn-default btn-sm" ng-click="editListing(listing)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Listing
                 </button>
                 <button type="button" class="btn btn-default btn-sm" ng-click="deleteListing(listing.userId,listing._id)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Delete Listing
                 </button>
+                    <br>
+                    <hr>
+                </div>
+
+
+
         </div>
+
 
             <div class="row">
                 <div class="col-md-12" id="review">

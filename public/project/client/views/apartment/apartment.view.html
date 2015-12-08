@@ -13,7 +13,7 @@
                         <div class="col-md-8" ng-show="editListingInfo">
                             <p>Beds:{{listing.beds}} Baths:{{listing.baths}} Rent:${{listing.rent}}</p>
                             <p>Available from {{listing.startDate}}</p>
-                            <p> {{listing.amenities}} </p>
+                            <p> Amenities  <span ng-repeat="amenities in listing.amenities" class="label label-info tags">{{amenities}}</span>
                             <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
                             <p>Email: {{landlord.email}}</p>
                             <p>Phone: {{landlord.phone}}</p>
@@ -28,7 +28,19 @@
                                 Baths:<input type="number" ng-model="listing.baths">
                                 Rent:$<input type="number" ng-model="listing.rent"> </p>
                             <p>Available from <input placeholder="Available from" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  id="date" ng-model="listing.startDate"></p>
-                            <p>Amenities <input type="text" placeholder="Input comma separated" ng-model="amenities"> </p>
+                            <p>Amenities
+                                <select class="form-control" ng-model="amenities" name="amenities" multiple>
+                                <option value="Laundry">Laundry</option>
+                                <option value="Dryer">Dryer</option>
+                                <option value="Heat">Heat</option>
+                                <option value="AC">AC</option>
+                                <option value="Gym">Gym</option>
+                                <option value="Pool">Pool</option>
+                                <option value="Patio">Patio</option>
+                                <option value="Covered Parking">Covered Parking</option>
+                                <option value="Dishwasher">Dishwasher</option>
+                            </select>
+                            </p>
                             <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
                             <p>Email: {{landlord.email}}</p>
                             <p>Phone: {{landlord.phone}}</p>
