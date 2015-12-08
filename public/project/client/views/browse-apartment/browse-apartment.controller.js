@@ -11,6 +11,7 @@
         $scope.listing={};
         $scope.landlord={};
         $scope.amenities="";
+        $scope.places=[];
 
         $scope.creds = {
             bucket: 'cs5610anish',
@@ -47,9 +48,17 @@
                     $scope.landlord= landlord;
                 });
 
-            initMap();
+
+            initMap()
+                .then(function(places){
+                    $scope.places=places;
+
+                })
+
 
         }
+
+       
 
 
         $scope.openLightboxModal = function (index) {
@@ -81,6 +90,7 @@
         }
 
         function initMap() {
+            var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
             var latitude=0;
             var longitude=0;
@@ -110,9 +120,24 @@
                         map: map,
 
                     });
+
+                   var request ={location:latlng,radius:'500',types:['stores','restaurant']};
+                    var service = new google.maps.places.PlacesService(map);
+                    var places=[];
+                    service.nearbySearch(request,function(results,status){
+                        if(status==google.maps.places.PlacesServiceStatus.OK){
+                            for(var i=0;i<results.length;i++){
+                               // console.log(results[i]);
+                                places.push(results[i]);
+                               deferred.resolve(places);
+                            }
+                        }
+                    })
+
+
                 }
             });
-
+            return deferred.promise;
         }
         google.maps.event.addDomListener(window, 'load', initMap);
 

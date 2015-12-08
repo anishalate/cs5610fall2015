@@ -75,7 +75,9 @@
                         <p>Location:{{apartment.address}}</p>
                         <p>Available from {{apartment.startDate}}</p>
 
-                        <p ng-if="apartment.amenities.length>0"> {{apartment.amenities}} </p>
+                        <p>
+                            <span ng-repeat="amenities in apartment.amenities" class="label label-info tags">{{amenities}}</span>
+                        </p>
                         
                         <a class="btn btn-primary" ng-click="browseApartment(apartment)">View Apartment </a>
                     </div>

@@ -13,7 +13,7 @@
                     <div class="col-md-8">
                         <p>Beds:{{listing.beds}} Baths:{{listing.baths}} Rent:${{listing.rent}}</p>
                         <p>Available from {{listing.startDate}}</p>
-                        <p> {{listing.amenities}} </p>
+                        <p> Amenities  <span ng-repeat="amenities in listing.amenities" class="label label-info tags">{{amenities}}</span>
                         <p>Owner: {{landlord.firstName}} {{landlord.lastName}}</p>
                         <p>Email: {{landlord.email}}</p>
                         <p>Phone: {{landlord.phone}}</p>
@@ -46,6 +46,31 @@
 
                 </div>
             </div>
+            <div class="row" id="places">
+                <h3>Near by Places</h3>
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price Level</th>
+                            <th>Rating</th>
+                            <th>Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="place in places">
+                            <td>{{place.name}}</td>
+                            <td>{{place.price_level}}</td>
+                            <td>{{place.rating}}</td>
+                            <td>{{place.vicinity}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
             <br>
             <br>
             <hr>
