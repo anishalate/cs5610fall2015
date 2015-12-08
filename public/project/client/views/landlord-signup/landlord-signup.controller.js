@@ -6,7 +6,7 @@
 
 
 
-    function LandlordSignupController($location,$scope,$rootScope,LandlordService,ListingService) {
+    function LandlordSignupController($location,$scope,$rootScope,LandlordService,ListingService,$cookieStore) {
         $scope.landlord ={};
         $scope.listing ={};
         init();
@@ -45,6 +45,7 @@
                     ListingService.createListing(landlord._id,$scope.listing)
                         .then(function(listing){
                             $rootScope.currentListing = listing;
+                            $cookieStore.put('landlord',$rootScope.currentLandlord);
                             $location.path("/landlord-profile");
                         })
                 });
