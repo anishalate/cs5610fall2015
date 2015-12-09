@@ -98,6 +98,23 @@
                 })
         }
 
+        $scope.filterResults= function(){
+
+            var list=[];
+            for(var i=0;i<$scope.userList.length;i++){
+                var user=$scope.userList[i];
+                if($scope.ageMin==""||$scope.ageMax==""||$scope.sex==""||$scope.roomType==""){
+                    alert("Please fill all search fields");
+                    return;
+                }
+                if(user.userDetails.age>=$scope.ageMin&&user.userDetails.age<=$scope.ageMax
+                &&(user.userPref.roomType==$scope.roomType||user.userPref.roomType=="any")&&(user.userDetails.sex==$scope.sex||user.userDetails.sex=="any")){
+                    list.push(user);
+                }
+            }
+            initList(list);
+        }
+
 
     }
 })();
