@@ -28,10 +28,11 @@
             UserService.createUser($rootScope.newUser)
                 .then(function(newUser){
                     $rootScope.currentUser = newUser;
+                    $cookieStore.put('user',newUser);
+                    $location.path("/profile");
                 })
             console.log($rootScope.newUser);
-            $cookieStore.put('user',$rootScope.newUser);
-            $location.path("/profile");
+
         }
 
 
