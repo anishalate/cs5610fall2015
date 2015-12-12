@@ -37,7 +37,10 @@
             $scope.actualList = list;
             for(var i=0;i<list.length;i++){
 
-                $scope.generatePicUrl($scope.actualList[i],$scope.actualList[i].userDetails.profilePicUrl);
+                $scope.generatePicUrl($scope.actualList[i].userDetails.profilePicUrl)
+                    .then(function(url){
+                        $scope.actualList[i].userDetails.profilePicUrl=url;
+                    })
                 var user = $rootScope.currentUser;
                 var total = 8;
                 var count =0;
@@ -76,17 +79,18 @@
             }
         }
 
-        $scope.generatePicUrl =function(user,imageKey){
+        $scope.generatePicUrl =function(imageKey){
             var s3 = new AWS.S3();
             var deferred = $q.defer();
             var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};
             var url = s3.getSignedUrl('getObject', params, function (err, url) {
                 if (url){
                     console.log("The URL is", url);
-                    user.userDetails.profilePicUrl=url;
+
+                    deferred.resolve(url);
                 }
             });
-          
+          return deferred.promise;
 
         };
 
