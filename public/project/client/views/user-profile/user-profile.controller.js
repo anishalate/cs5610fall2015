@@ -41,11 +41,13 @@
                     generatePicUrl();
 
                 }
-              generateLikesInfo()
-                  .then(function(likesUserName){
-                      $scope.likesUser=likesUserName;
+                if($scope.user.userDetails.likesUser!==undefined) {
+                    generateLikesInfo()
+                        .then(function (likesUserName) {
+                            $scope.likesUser = likesUserName;
 
-                  });
+                        });
+                }
                 generateLikedByInfo()
                     .then(function(likedByUsers){
                         $scope.likedByUsers=likedByUsers;
