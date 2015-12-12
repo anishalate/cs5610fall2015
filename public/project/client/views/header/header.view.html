@@ -38,6 +38,7 @@
                     </div>
                     <div id="navbar1" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
+                            <li ng-class="{'active':$location.url().indexOf('/profile')!=-1}" ng-click="init()"><a href="#/profile">My Profile</a></li>
                             <li ng-class="{'active':$location.url().indexOf('search-roommates')!=-1}" ng-click="init()"><a href="#/search-roommates">Search Roommates</a></li>
                             <li ng-class="{'active':$location.url().indexOf('search-apartments')!=-1}" ng-click="init()"><a href="#/search-apartments">Search Apartments</a></li>
 
