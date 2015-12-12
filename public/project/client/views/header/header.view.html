@@ -63,7 +63,10 @@
                                 <a class="navbar-brand" href="#/home">Roomies</a>
                             </div>
                             <div id="navbar3" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li ng-class="{'active':$location.url().indexOf('/landlord-profile')!=-1}" ><a href="#/landlord-profile">My Profile</a></li>
 
+                                </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a class="btn" ng-click="logout()">Log Out </a></li>
                                 </ul>
