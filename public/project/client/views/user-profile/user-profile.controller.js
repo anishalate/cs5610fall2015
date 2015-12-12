@@ -6,7 +6,7 @@
 
 
 
-    function UserProfileController($location,$scope,$rootScope,UserService,$cookieStore) {
+    function UserProfileController($location,$scope,$rootScope,UserService,$cookieStore,$q) {
 
         $scope.showDisplay = true;
         $scope.showEdit = false;
@@ -21,6 +21,7 @@
         $scope.uploadProgress = 0;
         $scope.editProfile=false;
         $scope.likedByUsers=[];
+        $scope.likesUser=[];
         $scope.creds = {
             bucket: 'cs5610anish',
             access_key: 'AKIAJNX74V2SPUBGSRLQ',
@@ -33,13 +34,25 @@
             $rootScope.currentUser=$cookieStore.get('user');
             if($rootScope.currentUser!==undefined){
                 $scope.user= $rootScope.currentUser;
-                generateLikesInfo();
+
                 AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
                 AWS.config.region = 'us-east-1';
                 if($scope.user.userDetails.profilePicUrl!==undefined){
                     generatePicUrl();
 
                 }
+              generateLikesInfo()
+                  .then(function(likesUserName){
+                      $scope.likesUser=likesUserName;
+
+                  });
+                generateLikedByInfo()
+                    .then(function(likedByUsers){
+                        $scope.likedByUsers=likedByUsers;
+                        console.log(likedByUsers);
+                    })
+
+
             }
             else{
              $location.path("/signin");
@@ -57,6 +70,7 @@
             });
 
         }
+
         $scope.edit=function(){
             $scope.showEdit = true;
             $scope.showDisplay = false;
@@ -179,26 +193,41 @@
 
         }
 
-        function generateLikesInfo(){
-            for(var userId in $scope.user.userDetails.likesUser){
-                UserService.findUserById(userId)
-                    .then(function(user){
-                        $scope.user.userDetails.likesUserName = user.userDetails.firstName+" "+user.userDetails.lastName;
-                    })
+       function generateLikesInfo() {
 
-            }
+           var likesUserName = [];
+           var deferred = $q.defer();
+           for (var i = 0; i < $scope.user.userDetails.likesUser.length; i++) {
+               var userId = $scope.user.userDetails.likesUser[i];
+               UserService.findUserById(userId)
+                   .then(function (user) {
+                       likesUserName.push(user.userDetails.firstName + " " + user.userDetails.lastName);
+                       deferred.resolve(likesUserName);
+                   });
 
-           UserService.findAllUsers()
-               .then(function(users){
-                   for(var user in users) {
-                       for (var userId in user.userDetails.likesUser) {
-                           if (userId == $scope.user._id) {
-                               $scope.likedByUsers.push[users.userDetails.firstName + " " + users.userDetails.lastName];
-                           }
-                       }
-                   }
 
-            });
+           }
+           return deferred.promise;
+       }
+        function generateLikedByInfo(){
+
+             var likedByUsers=[];
+            var deferred = $q.defer();
+             UserService.findAllUsers()
+                 .then(function(users){
+                     for(var j=0;j<users.length;j++) {
+                         var user = users[j];
+                         for (var i=0;i<user.userDetails.likesUser.length;i++)  {
+                            var userId = user.userDetails.likesUser[i];
+                             if (userId == $scope.user._id) {
+                                 likedByUsers.push(user.userDetails.firstName + " " + user.userDetails.lastName);
+                                 deferred.resolve(likedByUsers);
+                             }
+                         }
+                     }
+
+              });
+            return deferred.promise;
         }
 
 

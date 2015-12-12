@@ -59,11 +59,6 @@
         }
 
 
-
-
-        $scope.openLightboxModal = function (index) {
-            Lightbox.openModal($scope.images, index);
-        }
         $scope.generatePicUrl =function(imageKey){
             var s3 = new AWS.S3();
             var params = {Bucket: $scope.creds.bucket, Key:imageKey , Expires: 60};

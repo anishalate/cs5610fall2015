@@ -1,5 +1,5 @@
 
-<div class="container" ng-controller="UserProfileController">
+<div class="container">
     <div class="row">
         <div class="col-md-16 col-xs-12">
             <div class="well panel panel-default">
@@ -67,17 +67,34 @@
         <li role="presentation" ><a href="#/profile">About</a></li>
         <li role="presentation" class="active"><a href="#/profile-likes">Likes</a></li>
     </ul>
-    <div class="table-responsive" contenteditable>
+    <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
-            <th>People you Like</th>
-            <th>People who Like you </th>
+            <tr>
+                <th>People you Like</th>
+            </tr>
+            <!--<th>People who Like you </th>!-->
 
             </thead>
 
             <tbody>
-            <tr ng-repeat="likes in user.userDetails.likesUserName">
-            {{likes}}
+            <tr ng-repeat="likes in likesUser">
+                <td>{{likes}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>People who like you</th>
+            </tr>
+            <!--<th>People who Like you </th>!-->
+
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="likes in likedByUsers">
+                <td>{{likes}}</td>
             </tr>
             </tbody>
         </table>

@@ -41,6 +41,7 @@
                 })
                 .when("/profile-likes",{
                     templateUrl :"views/user-profile/user-profile-likes.view.html",
+                    controller:"UserProfileController"
                 })
                 .when("/search-roommates",{
                     templateUrl :"views/search-roommates/search-roommates.view.html",

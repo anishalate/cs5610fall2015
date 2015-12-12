@@ -38,8 +38,9 @@
 
                     }
                     showContactInfo();
-                    for(var users in $rootScope.currentUser.userDetails.likesUser){
-                        if($scope.user._id==users._id){
+                    for(var i=0;i<$rootScope.currentUser.userDetails.likesUser.length;i++){
+                        var users = $rootScope.currentUser.userDetails.likesUser[i];
+                        if($scope.user._id==users){
                             $scope.isLiked=true;
                         }
                     }
@@ -59,7 +60,7 @@
             UserService.updateUser($rootScope.currentUser._id,$rootScope.currentUser)
                 .then(function(status){
                     $cookieStore.put('user',$rootScope.currentUser);
-                })
+                });
 
         }
         function generatePicUrl(){
@@ -78,16 +79,20 @@
             var check1=false;
             var check2=false;
             if($rootScope.currentUser.userDetails.likesUser!==undefined) {
-                for (var users in $rootScope.currentUser.userDetails.likesUser) {
-                    if ($scope.user._id == users._id) {
+                for (var i=0 ;i<$rootScope.currentUser.userDetails.likesUser.length;i++) {
+                    var users= $rootScope.currentUser.userDetails.likesUser[i];
+                    if ($scope.user._id == users) {
                         check1 = true;
+                        break;
                     }
                 }
             }
             if($scope.user.userDetails.likesUser!==undefined) {
-                for (var users1 in $scope.user.userDetails.likesUser) {
-                    if (users1._id == $rootScope.currentUser._id) {
+                for (var i=0;i< $scope.user.userDetails.likesUser.length;i++) {
+                    var users1 = $scope.user.userDetails.likesUser[i];
+                    if (users1== $rootScope.currentUser._id) {
                         check2 = true;
+                        break;
                     }
 
                 }
