@@ -86,7 +86,7 @@
                     user.userDetails.profilePicUrl=url;
                 }
             });
-           return deferred.promise;
+          
 
         };
 
