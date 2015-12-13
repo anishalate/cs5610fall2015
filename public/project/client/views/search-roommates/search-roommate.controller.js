@@ -36,6 +36,10 @@
         function initList(list){
             $scope.actualList = list;
             for(var i=0;i<list.length;i++){
+                if($scope.actualList[i]._id==$rootScope.currentUser._id){
+                    $scope.actualList.splice(i,1);
+                    continue;
+                }
 
                 $scope.generatePicUrl($scope.actualList[i],$scope.actualList[i].userDetails.profilePicUrl);
                 var user = $rootScope.currentUser;
@@ -69,9 +73,7 @@
                     count++
                 }
                 $scope.actualList[i].roomMateMatch = count/total*100;
-                if($scope.actualList[i]._id==$rootScope.currentUser._id){
-                    $scope.actualList.splice(i,1);
-                }
+
 
             }
         }
