@@ -59,9 +59,9 @@
                 </div>!-->
             </div>
                     <div class="row stylish-panel">
-                        <div class="col-md-12"  ng-repeat="user in actualList">
+                        <div class="col-md-4"  ng-repeat="user in actualList">
                             <div>
-                                <img ng-src="{{user.userDetails.profilePicUrl}}" class="img-square img-thumbnail thumbs">
+                                <img class="img-square img-thumbnail thumbs" ng-src="{{user.userDetails.profilePicUrl}}">
                                 <h3>Roomie Match {{user.roomMateMatch}}%</h3>
                                 <h3>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</h3>
                                 <p> {{user.userDetails.age}}, {{user.userDetails.sex}} |   Works at {{user.userDetails.employment}} | {{user.userDetails.education}} </p>
