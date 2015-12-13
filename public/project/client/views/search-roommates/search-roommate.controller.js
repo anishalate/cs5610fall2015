@@ -38,6 +38,7 @@
             for(var i=0;i<list.length;i++){
                 if($scope.actualList[i]._id==$rootScope.currentUser._id){
                     $scope.actualList.splice(i,1);
+                    i--;
                     continue;
                 }
 
